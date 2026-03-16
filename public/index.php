@@ -11,6 +11,6 @@ $router = new Router();
 |----------------------------
 */
 
-$router->get('/', 'homecontroller@index');
+$router->get('/', 'homeController@index');
 
 $router->dispatch();
