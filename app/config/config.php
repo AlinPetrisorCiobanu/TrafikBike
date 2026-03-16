@@ -1,30 +1,21 @@
 <?php
-class Database {
-    private static $instance = null;
-    public $pdo;
+/*
+|--------------------------------------------------------------------------
+| Configuración base de la app
+|--------------------------------------------------------------------------
+*/
 
-    private function __construct() {
-        $config = json_decode(file_get_contents(__DIR__ . '/../private/private.json'));
+// URL base de la aplicación
+// Cambia esta ruta según el entorno
+// Local: "/practicas/trafikbike/public"
+// Producción: ""
+define("BASE_URL", getenv('BASE_URL') ?: "/practicas/trafikbike/public");
 
-        try {
-            $this->pdo = new PDO(
-                "mysql:host={$config->host};charset=utf8mb4",
-                $config->user,
-                $config->pass,
-                [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
-            );
-            $this->pdo->exec("USE {$config->name}");
+// Ruta raíz del proyecto
+define("ROOT_PATH", dirname(__DIR__, 2));
 
-        } catch (PDOException $e) {
-            die("Error de conexión: " . $e->getMessage());
-        }
-    }
-
-    public static function getInstance() {
-        if (self::$instance === null) {
-            self::$instance = new Database();
-        }
-        return self::$instance;
-    }
-}
-?>
+// Configuración de base de datos
+define("DB_HOST", getenv('DB_HOST') ?: 'localhost');
+define("DB_USER", getenv('DB_USER') ?: 'root');
+define("DB_PASS", getenv('DB_PASS') ?: '');
+define("DB_NAME", getenv('DB_NAME') ?: 'trafikbike');

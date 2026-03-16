@@ -21,6 +21,16 @@ class Router {
 
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
+        $base = BASE_URL;
+
+        $url = str_replace($base, "", $url);
+
+        $url = rtrim($url, "/");
+
+        if($url === ""){
+            $url = "/";
+        }
+
         if(isset($this->routes[$method][$url]))
         {
 
@@ -28,7 +38,7 @@ class Router {
 
             list($controller, $method) = explode('@', $action);
 
-            require_once __DIR__ . "/../controllers/".$controller.".php";
+            require_once ROOT_PATH."/app/controllers/".$controller.".php";
 
             $controller = new $controller();
 
