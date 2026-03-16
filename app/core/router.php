@@ -28,7 +28,7 @@ class Router {
 
             list($controller, $method) = explode('@', $action);
 
-            require_once "../app/controllers/".$controller.".php";
+            require_once __DIR__ . "/../controllers/".$controller.".php";
 
             $controller = new $controller();
 
