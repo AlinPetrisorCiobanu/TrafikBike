@@ -1,3 +1,9 @@
-<h1>trafikbike</h1>
+<?php 
+    include __DIR__ . "/../layouts/header.php"
+?>
 
-<p>bienvenido a la plataforma</p>
+    <h1>Home of TrafikBike</h1>
+    
+<?php 
+    include __DIR__ . "/../layouts/footer.php"
+?>
