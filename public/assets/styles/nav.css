@@ -1,0 +1,227 @@
+/* NAVBAR */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    z-index: 2000;
+}
+
+/* Logo y nombre del concesionario */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* separación entre logo y nombre */
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #111; /* color del nombre */
+}
+
+.logo-img {
+    height: 70px; /* altura del logo */
+    width: auto;
+}
+
+.concesionario-name {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* MENU */
+nav ul.menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+    align-items: center;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+}
+
+.menu li a {
+    text-decoration: none;
+    color: #222;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu li a:hover {
+    color: #0077ff;
+}
+
+/* LOGIN / REGISTER */
+.menu .auth a {
+    border: 1px solid #0077ff;
+    padding: 8px 20px;
+    border-radius: 20px;
+    color: #0077ff;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.menu .auth a:hover {
+    background: #0077ff;
+    color: white;
+}
+
+/* CART */
+.cart {
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cart-icon {
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    position: relative;
+}
+
+.cart-count {
+    background: #ff3b3b;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 11px;
+    position: absolute;
+    top: -6px;
+    right: -8px;
+    min-width: 16px;
+    text-align: center;
+}
+
+/* DROPDOWN CARRITO */
+.cart-dropdown {
+    position: absolute;
+    right: 0;
+    top: 55px;
+    background: white;
+    width: 260px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    padding: 25px 15px;
+    display: none;
+    z-index: 3000;
+    border-radius: 10px;
+}
+
+.cart_active {
+    display: block;
+}
+
+/* ITEMS DEL CARRITO */
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    gap: 5px;
+}
+
+.cart-qty-controls {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.cart-qty-controls button {
+    padding: 2px 6px;
+    border: 1px solid #ccc;
+    background: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.cart-remove {
+    background: none;
+    border: none;
+    color: red;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.cart-total {
+    border-top: 1px solid #eee;
+    padding-top: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.cart-name{
+    color: #222;
+}
+
+#go-cart {
+    display: block;
+    text-align: center;
+    background: #111;
+    color: #eee;
+    padding: 8px;
+    margin-top: 10px;
+    text-decoration: none;
+    border-radius: 6px;
+}
+
+/* DESKTOP */
+@media (min-width: 769px) {
+    .menu .auth:first-of-type {
+        margin-left: auto;
+    }
+}
+
+/* HAMBURGER */
+.hamburger {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+    .hamburger {
+        display: block;
+        color: #111;
+    }
+
+    nav ul.menu {
+        position: fixed;
+        top: 0;
+        left: -100%;
+        height: 100vh;
+        width: 250px;
+        background: white;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        padding-top: 60px;
+        transition: 0.4s;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        z-index: 2500;
+    }
+
+    nav ul.menu.active {
+        left: 0;
+    }
+
+    .cart-dropdown {
+        right: -40px;
+        width: 240px;
+    }
+}
