@@ -10,10 +10,10 @@
 // Local: "/practicas/trafikbike/public"
 
 // Producción: ""
-define("BASE_URL", getenv('BASE_URL') ?: "");
+// define("BASE_URL", getenv('BASE_URL') ?: "");
 
 // Localhost
-// define("BASE_URL", getenv('BASE_URL') ?: "/practicas/trafikbike/public");
+define("BASE_URL", getenv('BASE_URL') ?: "/practicas/trafikbike/public");
 
 // Ruta raíz del proyecto
 define("ROOT_PATH", dirname(__DIR__, 2));
