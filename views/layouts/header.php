@@ -16,8 +16,9 @@ $cart = ["count"=>0, "data"=>[], "total"=>0];
     <!-- CSS global -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/main.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/index.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/footer.css">
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/nav.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/footer.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/motos.css">
 
     <!-- JS -->
      <!-- se añade defer para que primero cargue todo el contenido y despues el archivo js -->
