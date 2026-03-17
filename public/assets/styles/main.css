@@ -10,9 +10,9 @@ body {
     background-image: 
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
         /* url para produccion */
-        /* url("/assets/img/bg-1.jpg"); */
+        url("/assets/img/bg-1.jpg");
         /* url para local */
-        url("../img/bg-1.jpg");
+        /* url("../img/bg-1.jpg"); */
     background-attachment: fixed;
     background-size: cover;
     background-position: center;
