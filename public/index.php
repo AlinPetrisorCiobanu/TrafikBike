@@ -13,5 +13,6 @@ $router = new Router();
 
 $router->get('/', 'homeController@index');
 $router->get('/motos', 'motosController@index');
+$router->get('/tienda', 'tiendaController@index');
 
 $router->dispatch();
