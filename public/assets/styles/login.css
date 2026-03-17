@@ -1,0 +1,151 @@
+#form_login {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    padding: 20px;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: form_open 0.5s forwards;
+}
+
+/* Animación */
+@keyframes form_open {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Formulario */
+#form_login form {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: #ffffffee;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Título */
+#form_login form h2 {
+    text-align: center;
+    color: #0077ff;
+    margin-bottom: 15px;
+}
+
+/* Inputs */
+.form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.form_group input {
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: 0.3s;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px 20px;
+}
+
+#user_login { background-image: url('../img/icons/user-circle.svg'); }
+#pass_login { background-image: url('../img/icons/lock.svg'); }
+
+.form_group input:focus {
+    outline: none;
+    border-color: #0077ff;
+}
+
+/* Botones */
+.order_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.order_buttons button,
+.order_buttons a {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #0077ff;
+    background-color: #0077ff;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.order_buttons button:hover,
+.order_buttons a:hover {
+    background-color: #005fcc;
+}
+
+/* Modal errores */
+#modal_login {
+    position: fixed;
+    top: 70px;
+    right: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1100;
+}
+
+.modal {
+    background: #f56363cc;
+    color: #fff;
+    padding: 15px 20px;
+    border-radius: 5px;
+    font-size: 0.95em;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.modal.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.modal.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+/* Responsive */
+@media (max-width: 500px){
+    #form_login form {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .order_buttons {
+        flex-direction: column;
+    }
+
+    .order_buttons button,
+    .order_buttons a {
+        width: 100%;
+    }
+}
