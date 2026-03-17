@@ -1,0 +1,80 @@
+.hero{
+margin-top: 5vh;
+height:70vh;
+background:url("https://images.unsplash.com/photo-1558981806-ec527fa84c39") center/cover;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color: aliceblue;
+}
+
+
+.hero h1{
+font-size:48px;
+margin-bottom:10px;
+color: aliceblue;
+}
+
+.hero p{
+font-size:20px;
+margin-bottom:20px;
+color: aliceblue;
+}
+
+.hero .btn{
+padding:12px 25px;
+margin:5px;
+border:none;
+background:#ff3c00;
+color:white;
+cursor:pointer;
+font-size:16px;
+transition:0.3s;
+text-decoration: none;
+}
+
+.hero .btn:hover{
+background:#ff1e00;
+}
+
+/* MOTOS */
+
+.motos{
+padding:60px 10%;
+text-align:center;
+}
+
+.motos h2{
+margin-bottom:40px;
+color: aliceblue;
+}
+
+.moto-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:30px;
+}
+
+.moto{
+background:#1a1a1a;
+padding:20px;
+border-radius:10px;
+}
+
+.moto img{
+width:100%;
+border-radius:10px;
+}
+
+.moto h3{
+margin-top:10px;
+color: aliceblue;
+}
+
+.moto p{
+color:#ff3c00;
+font-weight:bold;
+color: aliceblue;
+}

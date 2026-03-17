@@ -7,6 +7,7 @@
     <title>TrafikBike</title>
     <!-- CSS global -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/main.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/assets/styles/index.css">
 
 </head>
 <body>
