@@ -9,7 +9,7 @@
 // Cambia esta ruta según el entorno
 // Local: "/practicas/trafikbike/public"
 // Producción: ""
-define("BASE_URL", getenv('BASE_URL') ?: "/practicas/trafikbike/public");
+define("BASE_URL", getenv('BASE_URL'));
 
 // Ruta raíz del proyecto
 define("ROOT_PATH", dirname(__DIR__, 2));
