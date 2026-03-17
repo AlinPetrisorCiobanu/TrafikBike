@@ -7,7 +7,7 @@ $router = new Router();
 
 /*
 |----------------------------
-| rutas de la aplicación
+| rutas para el Usuario de la aplicación
 |----------------------------
 */
 
@@ -24,5 +24,14 @@ $router->get('/tienda', 'tiendaController@index');
 $router->get('/login', 'authController@index');
 $router->post('/login', 'authController@login');
 $router->get('/logout', 'authController@logout');
+
+/*
+|----------------------------
+| rutas register de la aplicacion
+|----------------------------
+*/
+
+$router->get('/register', 'registerController@index');
+$router->post('/register', 'registerController@register');
 
 $router->dispatch();

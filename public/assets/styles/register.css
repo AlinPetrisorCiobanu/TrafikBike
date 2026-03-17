@@ -1,0 +1,196 @@
+/* Contenedor con fondo blur */
+#form_reg {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(10px);
+    background: rgba(0,0,0,0.4);
+    z-index: 1000;
+    padding: 20px;
+    opacity: 0;
+    transform: scale(0.9);
+    animation: form_open 0.5s forwards;
+}
+
+/* Animación apertura */
+@keyframes form_open {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Formulario */
+#form_reg form {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: #ffffffee;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Título */
+#form_reg form h2 {
+    text-align: center;
+    color: #0077ff;
+    margin-bottom: 15px;
+}
+
+/* Inputs */
+.form_group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form_group label {
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #222;
+}
+
+.form_group input {
+    padding: 12px 15px 12px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 1em;
+    transition: 0.3s;
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 20px 20px;
+}
+
+#name { background-image: url('../img/icons/user.svg'); }
+#last_name { background-image: url('../img/icons/user.svg'); }
+#dni { background-image: url('../img/icons/id-card.svg'); }
+#phone { background-image: url('../img/icons/phone.svg'); }
+#email { background-image: url('../img/icons/email.svg'); }
+#user { background-image: url('../img/icons/user-circle.svg'); }
+#pass { background-image: url('../img/icons/lock.svg'); }
+
+.form_group input:focus {
+    outline: none;
+    border-color: #0077ff;
+}
+
+/* Inputs con error */
+.error_input {
+    border: 1px solid red;
+}
+
+/* Botones */
+.order_buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.order_buttons button,
+.order_buttons a {
+    flex: 1;
+    padding: 12px 0;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid #0077ff;
+    background-color: #0077ff;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.order_buttons button:hover,
+.order_buttons a:hover {
+    background-color: #005fcc;
+}
+
+#modal {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1100000;
+}
+
+/* Modal individual */
+.modal {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #ff4d4f; /* rojo vibrante */
+    color: #000000;
+    padding: 15px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    font-size: 0.95em;
+    max-width: 350px;
+    min-width: 250px;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: transform 0.4s ease, opacity 0.4s ease;
+    position: relative;
+}
+
+/* Icono de alerta */
+.modal::before {
+    content: "!!!" ;
+    font-size: 1.3em;
+}
+
+/* Animación de entrada */
+.modal.show {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+/* Animación de salida */
+.modal.hide {
+    opacity: 0;
+    transform: translateX(120%);
+}
+
+/* Botón de cerrar (opcional) */
+.modal .close {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 500px){
+    #form_reg form {
+        width: 95%;
+        padding: 20px;
+    }
+
+    .order_buttons {
+        flex-direction: column;
+    }
+
+    .order_buttons button,
+    .order_buttons a {
+        width: 100%;
+    }
+    #modal {
+        top: 10px;
+        right: 10px;
+    }
+    .modal {
+        width: 90%;
+        min-width: 200px;
+        font-size: 0.9em;
+    }
+}
