@@ -26,8 +26,8 @@
 /* ================= Formulario ================= */
 #form_reg form {
     display: flex;
-    flex-wrap: wrap;          /* permite varias filas */
-    justify-content: center;  /* centra los items de cada fila */
+    flex-wrap: wrap;          
+    justify-content: center;  
     gap: 20px;
     width: 100%;
     max-width: 900px;
@@ -49,7 +49,7 @@
 
 /* ================= Inputs ================= */
 .form_group {
-    flex: 1 1 250px;          /* crece y encoge, mínimo 250px */
+    flex: 1 1 250px;          
     display: flex;
     flex-direction: column;
 }
@@ -99,22 +99,22 @@
     color: red;
     font-size: 0.8rem;
     margin-top: 4px;
-    min-height: 14px; /* evita salto de layout */
+    min-height: 14px; 
 }
 
 /* ================= Botones ================= */
 .order_buttons {
     width: 100%;
     display: flex;
-    justify-content: center;   /* centra los botones si hay espacio */
-    flex-wrap: wrap;           /* permite columnas en móvil */
+    justify-content: center;   
+    flex-wrap: wrap;          
     gap: 10px;
     margin-top: 20px;
 }
 
 .order_buttons button,
 .order_buttons a {
-    flex: 1 1 150px;           /* crece y encoge, mínimo 150px */
+    flex: 1 1 150px;          
     padding: 12px 0;
     border-radius: 10px;
     font-weight: bold;
@@ -122,21 +122,27 @@
     text-decoration: none;
     border: 1px solid #0077ff;
     background-color: #0077ff;
+    background: linear-gradient(135deg, #4f9cf9, #2a65f9);
     color: #fff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     cursor: pointer;
     transition: 0.3s;
-    min-width: 120px;          /* evita que se reduzcan demasiado */
+    min-width: 120px;       
 }
 
 .order_buttons button:hover,
-.order_buttons a:hover {
-    background-color: #005fcc;
+.order_buttons a:hover,
+.order_buttons button:focus,
+.order_buttons a:focus {
+    background: linear-gradient(135deg, #2a65f9, #4f9cf9);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
 }
 
 /* ================= Responsive ================= */
 @media (max-width: 800px) {
     .form_group {
-        flex: 1 1 45%; /* dos columnas */
+        flex: 1 1 45%; 
     }
     .pass_div{
         max-width: 100%;
@@ -145,19 +151,28 @@
 
 @media (max-width: 600px) {
     .form_group {
-        flex: 1 1 100%; /* una columna */
+        flex: 1 1 100%; 
     }
     .pass_div{
         max-width: 100%;
     }
 
+
     .order_buttons {
-        flex-direction: column; /* botones en columna */
+        flex-direction: column;
         align-items: center;
+        gap: 10px;
+       
     }
 
     .order_buttons button,
     .order_buttons a {
-        width: 100%;
+        flex: 1 1 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;       
+        padding: 10px;    
+        font-size: 0.95rem;
     }
 }
