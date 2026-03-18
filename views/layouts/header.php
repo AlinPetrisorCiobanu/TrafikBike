@@ -26,6 +26,7 @@ $cart = ["count"=>0, "data"=>[], "total"=>0];
     <!-- JS -->
      <!-- se añade defer para que primero cargue todo el contenido y despues el archivo js -->
     <script src="<?= BASE_URL ?>/assets/scripts/nav_control.js" defer></script>
+    <script src="<?= BASE_URL ?>/assets/scripts/reg_handler.js" defer></script>
 
 </head>
 <body>
