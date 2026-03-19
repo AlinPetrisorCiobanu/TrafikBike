@@ -32,7 +32,6 @@
             <div class="moto">
                 <img src="assets/img/kawasaki.png" alt="Kawasaki ZX10R">
                 <h3>Kawasaki ZX 10R</h3>
-                <p>20.200€</p>
                 <p>
                     <span class="precio-original">20.200€</span>
                     <span class="precio-oferta">19.499€</span>

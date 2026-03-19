@@ -114,14 +114,14 @@ const clearErrors = (containerId) => {
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('register_form');
 
-    // Blur (cuando sales del campo)
+    if (!form) return; // 🔥 imprescindible en MVC
+
     form.addEventListener('blur', (e) => {
         if (e.target.matches('input')) {
             validateField(e.target);
         }
     }, true);
 
-    // Input (mientras escribes)
     form.addEventListener('input', (e) => {
         if (e.target.matches('input')) {
             validateField(e.target);
