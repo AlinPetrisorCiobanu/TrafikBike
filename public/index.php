@@ -37,4 +37,14 @@ $router->get('/logout', 'authController@logout');
 $router->get('/register', 'registerController@index');
 $router->post('/register', 'registerController@register');
 
+/*
+|----------------------------
+|  llamadas ajax para comunicar front-back
+|----------------------------
+*/
+
+$router->get('/getcart', 'cartController@getCart');
+$router->post('/addcart', 'cartController@ajaxAdd');
+$router->post('/updatecart', 'cartController@ajaxUpdate');
+
 $router->dispatch();
