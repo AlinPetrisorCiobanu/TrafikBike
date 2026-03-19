@@ -2,7 +2,8 @@
     include __DIR__ . "/../layouts/header.php"
 ?>
 
-<h1 class="h_motos">Nuestras Motos Disponibles</h1>
+<h1 class="h_motos">Motos en Venta</h1>
+
 <div class="contenedor-motos">
 
 <?php if(!empty($motos)): ?>
@@ -11,25 +12,40 @@
 
         <div class="card-moto">
 
-            <div class="moto-header">
+            <!-- Imagen -->
+            <div class="moto-img">
+                <?php 
+                    // Nombre base sin extensión
+                    $nombreBase = $moto["matricula"] . "-" . $moto["anio"];
+
+                    // Extensiones posibles
+                    $extensiones = ["png", "jpg", "jpeg", "webp", "gif"];
+
+                    $rutaWeb = "assets/img/motos/z1000sx.png";
+
+                    // Buscar archivo existente
+                    foreach($extensiones as $ext) {
+                        $rutaServidor = __DIR__ . "/../../public/assets/img/motos/$nombreBase.$ext";
+                        if(file_exists($rutaServidor)) {
+                            $rutaWeb = "assets/img/motos/$nombreBase.$ext";
+                            break;
+                        }
+                    }
+                ?>
+                <img src="<?= $rutaWeb ?>" alt="<?= $moto["marca"] . ' ' . $moto["modelo"]; ?>">
+            </div>
+
+            <!-- Info básica -->
+            <div class="moto-info">
                 <h2><?= $moto["marca"]; ?></h2>
-                <span class="modelo"><?= $moto["modelo"]; ?></span>
+                <p class="modelo"><?= $moto["modelo"]; ?></p>
+                <p class="anio"><?= $moto["anio"]; ?></p>
             </div>
 
-            <div class="moto-body">
-                <p><strong>Matrícula:</strong> <?= $moto["matricula"]; ?></p>
-                <p><strong>Año:</strong> <?= $moto["anio"]; ?></p>
-                <p><strong>Kilómetros:</strong> <?= number_format($moto["km"]); ?> km</p>
-                <p><strong>Tipo:</strong> <?= $moto["tipo"]; ?></p>
-                <p><strong>Permiso:</strong> <?= $moto["permiso"]; ?></p>
-                <p><strong>Cilindrada:</strong> <?= $moto["cilindrada"]; ?> cm³</p>
-                <p><strong>Color:</strong> <?= $moto["color"]; ?></p>
-                <p><strong>Garantía:</strong> <?= $moto["garantia_meses"]; ?> meses</p>
-            </div>
-
+            <!-- Precio + acción -->
             <div class="moto-footer">
                 <span class="precio"><?= number_format($moto["precio"]); ?> €</span>
-                <button class="btn-ver">Ver moto</button>
+                <button class="btn-ver">Ver detalles</button>
             </div>
 
         </div>
@@ -44,7 +60,6 @@
 
 </div>
 
-
-    <?php 
+<?php 
     include __DIR__ . "/../layouts/footer.php"
-    ?>
+?>

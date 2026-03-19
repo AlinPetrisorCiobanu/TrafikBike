@@ -21,7 +21,7 @@
         <div class="moto-grid">
 
             <div class="moto">
-                <img src="assets/img/harley_davidson.png" alt="Harley Davidson Fat Bob">
+                <img src="assets/img/motos/harley_davidson.png" alt="Harley Davidson Fat Bob">
                 <h3>Harley Davidson Fat Bob</h3>
                 <p>
                     <span class="precio-original">22.700€</span>
@@ -30,7 +30,7 @@
             </div>
             
             <div class="moto">
-                <img src="assets/img/kawasaki.png" alt="Kawasaki ZX10R">
+                <img src="assets/img/motos/kawasaki.png" alt="Kawasaki ZX10R">
                 <h3>Kawasaki ZX 10R</h3>
                 <p>
                     <span class="precio-original">20.200€</span>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="moto">
-                <img src="assets/img/triumph.png" alt="Triumph Rocket 3">
+                <img src="assets/img/motos/triumph.png" alt="Triumph Rocket 3">
                 <h3>Triumph Rocket 3</h3>
                 <p>
                     <span class="precio-original">33.500€</span>
