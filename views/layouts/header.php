@@ -122,6 +122,7 @@ $cart = [
      <!-- se añade defer para que primero cargue todo el contenido y despues el archivo js -->
     <script src="<?= BASE_URL ?>/assets/scripts/nav_control.js" defer></script>
     <script src="<?= BASE_URL ?>/assets/scripts/carito_control.js" defer></script>
+    <script src="<?= BASE_URL ?>/assets/scripts/cart.js" defer></script>
     <script src="<?= BASE_URL ?>/assets/scripts/reg_handler.js" defer></script>
 
 </head>
