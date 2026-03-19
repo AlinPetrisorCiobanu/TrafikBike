@@ -43,18 +43,18 @@
 }
 
 /* Inputs */
-.form_group {
+.form_group_login {
     display: flex;
     flex-direction: column;
 }
 
-.form_group label {
+.form_group_login label {
     font-weight: 500;
     margin-bottom: 5px;
     color: #222;
 }
 
-.form_group input {
+.form_group_login input {
     padding: 12px 15px 12px 40px;
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -68,7 +68,7 @@
 #user_login { background-image: url('../img/icons/user-circle.svg'); }
 #pass_login { background-image: url('../img/icons/lock.svg'); }
 
-.form_group input:focus {
+.form_group_login input:focus {
     outline: none;
     border-color: #0077ff;
 }
@@ -109,28 +109,6 @@
     flex-direction: column;
     gap: 10px;
     z-index: 1100;
-}
-
-.modal {
-    background: #f56363cc;
-    color: #fff;
-    padding: 15px 20px;
-    border-radius: 5px;
-    font-size: 0.95em;
-    max-width: 300px;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: transform 0.4s ease, opacity 0.4s ease;
-}
-
-.modal.show {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-.modal.hide {
-    opacity: 0;
-    transform: translateX(100%);
 }
 
 /* Responsive */

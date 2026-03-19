@@ -18,84 +18,85 @@ $cart = [
     "total" => 0,
     "data" => []
 ];
-/*   EJEMPLO DE PRODUCTOS EN EL CARRITO
-$cart = [
+
+//   EJEMPLO DE PRODUCTOS EN EL CARRITO
+/* $cart = [
     "count" => 10,
-    "total" => 3_219.87, // Suma de precios finales * cantidad
+    "total" => 1849.95,
     "data" => [
         [
             "id_item" => 1,
-            "nombre" => "Casco Shoei GT-Air II",
+            "nombre" => "Casco Integral Shark",
             "categoria" => "casco",
-            "precio_final" => 499.99,
+            "precio_final" => 249.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 2,
-            "nombre" => "Guantes Alpinestars GP Pro",
+            "nombre" => "Guantes Racing Pro",
             "categoria" => "guantes",
-            "precio_final" => 149.99,
+            "precio_final" => 59.95,
             "cantidad" => 2
         ],
         [
             "id_item" => 3,
-            "nombre" => "Chaqueta Dainese Tempest",
+            "nombre" => "Chaqueta Moto Touring",
             "categoria" => "chaqueta",
-            "precio_final" => 299.99,
+            "precio_final" => 199.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 4,
-            "nombre" => "Mono Alpinestars GP Pro",
+            "nombre" => "Mono Deportivo",
             "categoria" => "mono",
-            "precio_final" => 799.99,
+            "precio_final" => 349.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 5,
-            "nombre" => "Botas Sidi Adventure 2",
+            "nombre" => "Botas Urban Moto",
             "categoria" => "botas",
-            "precio_final" => 349.99,
+            "precio_final" => 129.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 6,
-            "nombre" => "Chaleco Airbag Helite Turtle",
+            "nombre" => "Chaleco Reflectante",
             "categoria" => "chaleco",
-            "precio_final" => 499.99,
+            "precio_final" => 49.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 7,
-            "nombre" => "Casco AGV K6",
+            "nombre" => "Casco Abierto City",
             "categoria" => "casco",
-            "precio_final" => 399.99,
+            "precio_final" => 179.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 8,
-            "nombre" => "Guantes Dainese Tempest",
+            "nombre" => "Guantes Invierno",
             "categoria" => "guantes",
-            "precio_final" => 129.99,
+            "precio_final" => 69.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 9,
-            "nombre" => "Chaqueta Rev'it Horizon",
+            "nombre" => "Chaqueta Verano Ventilada",
             "categoria" => "chaqueta",
-            "precio_final" => 299.99,
+            "precio_final" => 189.95,
             "cantidad" => 1
         ],
         [
             "id_item" => 10,
-            "nombre" => "Botas Gaerne G-Rocket",
+            "nombre" => "Botas Off-Road Adventure",
             "categoria" => "botas",
-            "precio_final" => 399.99,
+            "precio_final" => 189.95,
             "cantidad" => 1
         ]
     ]
-];
-*/
+];*/
+
 ?>
 
 <!DOCTYPE html>

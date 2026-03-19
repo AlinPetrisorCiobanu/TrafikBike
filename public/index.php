@@ -14,6 +14,9 @@ $router = new Router();
 $router->get('/', 'homeController@index');
 $router->get('/motos', 'motosController@index');
 $router->get('/tienda', 'tiendaController@index');
+$router->get('/taller', 'tallerController@index');
+$router->get('/contacto', 'contactoController@index');
+$router->get('/usuario', 'usuarioController@index');
 
 /*
 |----------------------------
