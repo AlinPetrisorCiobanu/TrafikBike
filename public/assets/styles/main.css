@@ -2,7 +2,8 @@
    VARIABLES (ESTILO MOTO)
 ========================= */
 :root {
-    --bg-main: #0d0d0d;
+    --bgc-buttons: #ff3c00;
+    --bgc-cards :#1f1f1f ;
     --bg-secondary: #1a1a1a;
     --accent: #e10600;
     --accent-hover: #ff2a2a;
@@ -31,10 +32,10 @@ body {
         linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
 
         /* url para produccion */
-        /* url("/assets/img/bg-1.jpg"); */
+        url("/assets/img/bg-1.jpg");
 
         /* url para local */
-        url("../img/bg-1.jpg");
+        /* url("../img/bg-1.jpg"); */
         
     background-attachment: fixed;
     background-size: cover;

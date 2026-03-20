@@ -47,4 +47,12 @@ $router->get('/getcart', 'cartController@getCart');
 $router->post('/addcart', 'cartController@ajaxAdd');
 $router->post('/updatecart', 'cartController@ajaxUpdate');
 
+/*
+|----------------------------
+|  rutas a control panel de los admins, vendedores y mecanicos
+|----------------------------
+*/
+
+$router->get('/contro/panel', 'control_panelController@index');
+
 $router->dispatch();

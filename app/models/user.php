@@ -11,7 +11,11 @@ class User {
 
     // Login
     public function login($user_login, $pass){
-        $stmt = $this->pdo->prepare("SELECT * FROM users WHERE usuario=:login OR email=:login Limit 1");
+        $stmt = $this->pdo->prepare("
+            SELECT users.*,role.nombre AS rol FROM users
+            INNER JOIN role USING(id_role)
+            WHERE usuario=:login OR email=:login Limit 1"
+        );
         $stmt->execute(['login'=>$user_login]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -46,7 +50,7 @@ class User {
             $userId = $this->pdo->lastInsertId();
 
             $stmt = $this->pdo->prepare("
-                SELECT u.*, r.nombre AS role_nombre,
+                SELECT u.*, r.nombre AS rol,
                     v.comision, v.sueldo AS sueldo_vendedor, v.fecha_contrato AS fecha_contrato_vendedor,
                     m.cargo, m.sueldo AS sueldo_mecanico, m.fecha_contrato AS fecha_contrato_mecanico
                 FROM users u

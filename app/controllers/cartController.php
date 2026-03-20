@@ -26,7 +26,7 @@ class CartController {
         $items = $this->cartModel->getCartItems($userId);
         $summary = $this->cartModel->getCartSummary($userId);
 
-        // Formato consistente
+        // Formato de los productos del carrito
         $cart = [
             'count' => intval($summary['count'] ?? 0),
             'total' => floatval($summary['total'] ?? 0),
@@ -38,6 +38,7 @@ class CartController {
                 'id_item' => $item['id_item'] ?? $item['id_equipamiento'],
                 'nombre' => $item['nombre'],
                 'cantidad' => $item['cantidad'],
+                'precio' => $item['precio_unitario'],
                 'precio_final' => $item['precio_final'],
                 'categoria' => $item['categoria'] ?? ''
             ];
@@ -69,7 +70,9 @@ class CartController {
 
             echo json_encode([
                 'success'=>true,
+                'id_item' => $itemId,
                 'cantidad'=>$item['cantidad'] ?? 0,
+                'precio' => $item['precio_unitario'],
                 'precio_final'=>$item['precio_final'] ?? 0,
                 'total'=>floatval($summary['total']),
                 'count'=>intval($summary['count']),

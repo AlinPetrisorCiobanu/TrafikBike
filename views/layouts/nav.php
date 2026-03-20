@@ -8,6 +8,11 @@
         </div>
         <div class="hamburger" onclick="open_menu()">☰</div>
         <ul class="menu" id="menu">
+            <?php if($rol == "SUPER_ADMIN"||$rol == "ADMNI" || $rol == "VENDEDOR" || $rol == "MECANICO"){
+                ?>
+                    <li><a href="<?= BASE_URL ?>/contro/panel">Control Panel</a></li>
+                <?php
+            } ?>
             <li><a href="<?= BASE_URL ?>/">Inicio</a></li>
             <li><a href="<?= BASE_URL ?>/motos">Motos</a></li>
             <li><a href="<?= BASE_URL ?>/tienda">Tienda</a></li>

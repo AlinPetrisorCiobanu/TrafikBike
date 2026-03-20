@@ -1,116 +1,110 @@
-
-
-/* titulo */
-
-.h_boutique{
-    text-align:center;
-    font-size:40px;
-    margin:40px 0;
-    letter-spacing:2px;
-    margin-top: 150px;
-    font-family:Arial, Helvetica, sans-serif;
-    color:white;
+/* TITULO */
+.h_boutique {
+    text-align: center;
+    font-size: 48px;
+    margin: 150px 0 60px 0;
+    letter-spacing: 3px;
+    font-family: 'Impact', Arial, sans-serif;
+    color: var(--bgc-buttons);
+    text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
 }
 
-/* contenedor */
-
-.contenedor-boutique{
-    width:90%;
-    margin:auto;
-
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
-    
-    padding-top: 10dvh;
-    padding-bottom: 10dvh;
+/* CONTENEDOR GRID */
+.contenedor-boutique {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding: 40px 5%;
 }
 
-/* tarjeta */
-
-.card-accesorio{
-
-    background:#1a1a1a;
-    border-radius:10px;
-    overflow:hidden;
-
-    box-shadow:0 5px 15px rgba(0,0,0,0.6);
-
-    transition:0.3s;
-
-    font-family:Arial, Helvetica, sans-serif;
-    color:white;
+/* CARD ACCESORIO */
+.card-accesorio {
+    background: var(--bgc-cards);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-accesorio:hover{
-    transform:translateY(-8px);
-    box-shadow:0 10px 30px rgba(0,0,0,0.9);
+.card-accesorio:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
 }
 
-/* header */
-
-.accesorio-header{
-    padding:15px;
-    border-bottom:1px solid #333;
+/* IMAGEN */
+.accesorio-img img {
+    width: 100%;
+    height: auto; 
+    object-fit: contain;
+    display: block;
 }
 
-.accesorio-header h2{
-    margin:0;
-    font-size:20px;
-    color:#ff3c00;
+/* INFO DEL ACCESORIO */
+.accesorio-info {
+    padding: 15px 20px;
+    color: #ddd;
 }
 
-.modelo{
-    font-size:14px;
-    color:#ccc;
+.accesorio-info h2 {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
 }
 
-/* body */
-
-.accesorio-body{
-    padding:15px;
-    font-size:14px;
+.accesorio-info .modelo {
+    color: var(--bgc-buttons);
+    font-weight: 600;
+    margin: 5px 0 0 0;
 }
 
-.descripcion{
-    margin-top:10px;
-    color:#aaa;
+.accesorio-info .tipo {
+    font-size: 0.95rem;
+    color: #bbb;
+    margin-top: 5px;
 }
 
-/* footer */
-
-.accesorio-footer{
-
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-
-    padding:15px;
-    border-top:1px solid #333;
+/* FOOTER */
+.accesorio-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background: #111;
 }
 
-.precio{
-    font-size:20px;
-    font-weight:bold;
-    color:#00e676;
+.accesorio-footer .precio {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--bgc-buttons);
 }
 
-/* boton */
-
-.btn-comprar{
-
-    background:#ff3c00;
-    border:none;
-    padding:10px 18px;
-    border-radius:5px;
-
-    color:white;
-    font-weight:bold;
-
-    cursor:pointer;
-    transition:0.3s;
+.accesorio-footer .btn-ver {
+    background:var(--bgc-buttons);
+    border: none;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
 }
 
-.btn-comprar:hover{
-    background:#ff1a00;
+.accesorio-footer .btn-ver:hover {
+    background: #e03b00;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .contenedor-boutique {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 20px 5%;
+    }
+
+    .accesorio-img img {
+        height: 200px;
+    }
 }
