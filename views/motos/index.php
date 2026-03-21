@@ -25,7 +25,7 @@
 
                     // Buscar archivo existente
                     foreach($extensiones as $ext) {
-                        $rutaServidor = __DIR__ . "/../../public/assets/img/motos/$nombreBase.$ext";
+                        $rutaServidor = "assets/img/motos/$nombreBase.$ext";
                         if(file_exists($rutaServidor)) {
                             $rutaWeb = "assets/img/motos/$nombreBase.$ext";
                             break;
