@@ -50,10 +50,37 @@ $router->post('/updatecart', 'cartController@ajaxUpdate');
 
 /*
 |----------------------------
-|  rutas a control panel de los admins, vendedores y mecanicos
+|  rutas a control panel
 |----------------------------
 */
 
 $router->get('/contro/panel', 'control_panelController@index');
+
+/*
+|----------------------------
+|  rutas de control de los admins, vendedores y mecanicos
+|----------------------------
+*/
+
+/*    Usuarios    */
+$router->get('/control/panel/usuarios', 'control_panel_usuariosController@index');
+$router->post('/control/panel/usuarios/modificar', 'control_panel_usuariosController@modificar');
+$router->post('/control/panel/usuarios/eliminar', 'control_panel_usuariosController@eliminar');
+
+/*    Motos    */
+$router->get('/control/panel/motos', 'control_panel_motosController@index');
+$router->post('/control/panel/motos/modificar', 'control_panel_motosController@modificar');
+$router->post('/control/panel/motos/eliminar', 'control_panel_motosController@eliminar');
+
+/*    Tienda    */
+$router->get('/control/panel/tienda', 'control_panel_tiendaController@index');
+$router->post('/control/panel/tienda/modificar', 'control_panel_tiendaController@modificar');
+$router->post('/control/panel/tienda/eliminar', 'control_panel_tiendaController@eliminar');
+
+/*    Taller    */
+$router->get('/control/panel/taller', 'control_panel_tallerController@index');
+$router->post('/control/panel/taller/modificar', 'control_panel_tallerController@modificar');
+$router->post('/control/panel/taller/eliminar', 'control_panel_tallerController@eliminar');
+
 
 $router->dispatch();
