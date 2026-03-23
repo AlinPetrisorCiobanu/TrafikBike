@@ -1,2 +1,75 @@
+<div class="perfil-wrapper">
+    <?php if(is_array($usuario)): ?>
 
-<h1>Usuario</h1>
+    <div class="perfil-dashboard">
+
+        <!-- HEADER PERFIL -->
+        <div class="perfil-header">
+            <div class="perfil-avatar">
+                <?= strtoupper(substr($usuario['nombre'], 0, 1)) ?>
+            </div>
+            <div class="perfil-info">
+                <h1><?= $usuario['nombre'] . ' ' . ($usuario['apellidos'] ?? '') ?></h1>
+                <p class="perfil-rol"><?= $usuario['rol'] ?></p>
+                <span class="estado <?= $usuario['is_active'] ? 'activo' : 'inactivo' ?>">
+                    <?= $usuario['is_active'] ? 'Activo' : 'Inactivo' ?>
+                </span>
+            </div>
+        </div>
+
+        <!-- GRID INFO -->
+        <div class="perfil-grid">
+
+            <!-- DATOS PERSONALES -->
+            <div class="card">
+                <h2>Datos personales</h2>
+                <p><strong>ID:</strong> <?= $usuario['id_user'] ?></p>
+                <p><strong>Usuario:</strong> <?= $usuario['usuario'] ?></p>
+                <p><strong>Email:</strong> <?= $usuario['email'] ?></p>
+                <p><strong>DNI:</strong> <?= $usuario['dni'] ?></p>
+                <p><strong>Teléfono:</strong> <?= $usuario['telefono'] ?></p>
+            </div>
+
+            <!-- INFO GENERAL -->
+            <div class="card">
+                <h2>Información general</h2>
+                <p><strong>Rol:</strong> <?= $usuario['rol'] ?></p>
+                <p><strong>Estado:</strong> <?= $usuario['is_active'] ? 'Activo' : 'Inactivo' ?></p>
+            </div>
+
+            <!-- VENDEDOR -->
+            <?php if (!empty($usuario['sueldo_vendedor'])): ?>
+            <div class="card">
+                <h2>Datos de vendedor</h2>
+                <p><strong>Sueldo:</strong> <?= $usuario['sueldo_vendedor'] ?> €</p>
+                <p><strong>Comisión:</strong> <?= $usuario['comision'] ?>%</p>
+                <p><strong>Contrato:</strong> <?= $usuario['fecha_contrato_vendedor'] ?></p>
+            </div>
+            <?php endif; ?>
+
+            <!-- MECÁNICO -->
+            <?php if (!empty($usuario['sueldo_mecanico'])): ?>
+            <div class="card">
+                <h2>Datos de mecánico</h2>
+                <p><strong>Sueldo:</strong> <?= $usuario['sueldo_mecanico'] ?> €</p>
+                <p><strong>Cargo:</strong> <?= $usuario['cargo'] ?></p>
+                <p><strong>Contrato:</strong> <?= $usuario['fecha_contrato_mecanico'] ?></p>
+            </div>
+            <?php endif; ?>
+
+        </div>
+
+        <!-- ACCIONES -->
+        <div class="perfil-actions">
+            <a href="#" class="btn">Editar perfil</a>
+            <a href="<?= BASE_URL ?>/logout" class="btn logout">Cerrar sesión</a>
+        </div>
+
+    </div>
+
+    <?php else: ?>
+    
+        <p>Error cargando usuario</p>
+    
+    <?php endif; ?>
+</div>

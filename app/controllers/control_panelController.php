@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../core/Controller.php';
+require_once __DIR__ . '/../models/user.php';
 
 class ControlPanelController extends Controller {
 

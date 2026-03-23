@@ -70,4 +70,43 @@ class User {
             die("Error al registrar usuario: " . $e->getMessage());
         }
     }
+
+        // Obtener todos los usuarios de la base de datos
+    public function getAllUsers() {
+    $stmt = $this->pdo->prepare("
+        SELECT 
+            u.*,
+            r.nombre AS rol,
+            v.comision, v.sueldo AS sueldo_vendedor, v.fecha_contrato AS fecha_contrato_vendedor,
+            m.cargo, m.sueldo AS sueldo_mecanico, m.fecha_contrato AS fecha_contrato_mecanico
+        FROM users u
+        LEFT JOIN role r ON u.id_role = r.id_role
+        LEFT JOIN vendedor v ON u.id_user = v.id_user
+        LEFT JOIN mecanico m ON u.id_user = m.id_user
+        ORDER BY u.id_user DESC
+        ");
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // Buscar usuario por el ID
+    public function getUserById($id_user) {
+    $stmt = $this->pdo->prepare("
+        SELECT 
+            u.*,
+            r.nombre AS rol,
+            v.comision, v.sueldo AS sueldo_vendedor, v.fecha_contrato AS fecha_contrato_vendedor,
+            m.cargo, m.sueldo AS sueldo_mecanico, m.fecha_contrato AS fecha_contrato_mecanico
+        FROM users u
+        LEFT JOIN role r ON u.id_role = r.id_role
+        LEFT JOIN vendedor v ON u.id_user = v.id_user
+        LEFT JOIN mecanico m ON u.id_user = m.id_user
+        WHERE u.id_user = :id_user
+        LIMIT 1
+    ");
+
+    $stmt->execute(['id_user' => $id_user]);
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

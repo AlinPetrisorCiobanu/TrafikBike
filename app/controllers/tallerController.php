@@ -1,12 +1,14 @@
 <?php
 
-class tallercontroller {
+require_once __DIR__ . '/../core/controller.php';
+
+class TallerController extends Controller {
 
     public function index()
     {
-
-        require "../views/taller/index.php";
-
+        return $this->view("taller/index", [
+            "styles" => ["taller.css"]
+        ]);
     }
 
 }

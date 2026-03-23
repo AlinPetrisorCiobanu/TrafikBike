@@ -1,12 +1,14 @@
 <?php
 
-class contactocontroller {
+require_once __DIR__ . '/../core/controller.php';
+
+class ContactoController extends Controller {
 
     public function index()
     {
-
-        require "../views/contacto/index.php";
-
+        return $this->view("contacto/index", [
+            "styles" => ["contacto.css"]
+        ]);
     }
 
 }
