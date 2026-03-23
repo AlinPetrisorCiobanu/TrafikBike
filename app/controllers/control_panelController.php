@@ -21,7 +21,7 @@ class ControlPanelController extends Controller {
 
         // ✅ Render vista con layout
         return $this->view("control_panel/index", [
-            "styles" => ["panel.css"]
+            "styles" => ["control_panel/control_panel.css"]
         ]);
     }
 }
