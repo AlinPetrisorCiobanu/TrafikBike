@@ -2,7 +2,7 @@
     include __DIR__ . "/../layouts/header.php"
 ?>
 
-<h1>Control Panel</h1>
+<h1 class="h_motos"> Control panel</h1>
 
 
 <?php 

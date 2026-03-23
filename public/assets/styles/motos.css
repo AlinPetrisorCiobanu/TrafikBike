@@ -1,4 +1,4 @@
-/* Contenedor principal */
+/* GRID */
 .contenedor-motos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -17,94 +17,118 @@
     text-shadow: 2px 2px 6px rgba(0,0,0,0.8);
 }
 
-/* Card de cada moto */
+/* CARD */
 .card-moto {
     background: var(--bgc-cards);
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .card-moto:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 25px rgba(0,0,0,0.4);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 35px rgba(0,0,0,0.5);
 }
 
-/* Imagen de la moto */
+/* IMAGEN CONTENEDOR */
+.moto-img {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+}
+
+/* IMAGEN */
 .moto-img img {
     width: 100%;
-    height: auto; 
-    object-fit: contain;
-    display: block;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
 }
 
-/* Info de la moto (marca, modelo, año) */
+/* ZOOM HOVER */
+.card-moto:hover .moto-img img {
+    transform: scale(1.08);
+}
+
+/* BADGE (oferta/nuevo) */
+.badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #ff3c00;
+    color: #fff;
+    font-size: 0.75rem;
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* INFO */
 .moto-info {
-    padding: 15px 20px;
+    padding: 18px 20px 10px;
     color: #ddd;
 }
 
 .moto-info h2 {
     margin: 0;
-    font-size: 1.4rem;
+    font-size: 1.3rem;
     font-weight: 700;
 }
 
 .moto-info .modelo {
     color: var(--bgc-buttons);
     font-weight: 600;
-    margin: 5px 0 0 0;
+    margin-top: 4px;
 }
 
 .moto-info .anio {
-    font-size: 0.95rem;
-    color: #bbb;
-    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 6px;
 }
 
-/* Footer con precio y botón */
+/* FOOTER */
 .moto-footer {
+    margin-top: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    background: #111;
+    padding: 18px 20px;
+    background: #0d0d0d;
 }
 
-.moto-footer .precio {
-    font-size: 1.2rem;
+/* PRECIO */
+.precio {
+    font-size: 1.4rem;
     font-weight: bold;
     color: var(--bgc-buttons);
 }
 
-.moto-footer .btn-ver {
-    background:var(--bgc-buttons);
+/* BOTÓN PRO */
+.btn-ver {
+    background: linear-gradient(135deg, #ff4d00, #ff1e00);
     border: none;
     color: #fff;
-    padding: 8px 16px;
-    border-radius: 8px;
+    padding: 9px 18px;
+    border-radius: 10px;
     cursor: pointer;
     font-weight: 600;
-    transition: background 0.3s ease;
+    transition: all 0.3s ease;
 }
 
-.moto-footer .btn-ver:hover {
-    background: #e03b00;
+.btn-ver:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,60,0,0.4);
 }
 
-/* Responsive móviles */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .contenedor-motos {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 20px 5%;
-    }
-
-    .moto-img img {
-        height: 200px;
     }
 }

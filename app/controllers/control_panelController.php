@@ -1,24 +1,23 @@
 <?php
-session_start();
+
 
 class control_panelcontroller {
 
     public function index()
     {
-        $rol = "";
-        if(!isset($_SESSION['token'])){
-            echo json_encode(['success'=>false,'message'=>'No hay usuario logueado']);
+        $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
+
+        if (!isset($_SESSION['token']) || !isset($_SESSION['rol'])) {
+            header("Location: http://localhost/practicas/trafikbike/public/login");
             exit;
         }
-        if(!isset($_SESSION['rol'])){
-            echo json_encode(['success'=>false,'message'=>'No hay usuario logueado']);
+
+        if (!in_array($_SESSION['rol'], $rolesPermitidos)) {
+            header("Location: http://localhost/practicas/trafikbike/public");
             exit;
-        }else{
-            $rol = $_SESSION['rol'];
         }
-        if($rol === "SUPER_ADMIN" || $rol === "ADMIN" || $rol === "VENDEDOR" || $rol === "MECANICO"){
-            require "../views/control_panel/index.php";
-        }
+
+        require "../views/control_panel/index.php";
 
     }
 
