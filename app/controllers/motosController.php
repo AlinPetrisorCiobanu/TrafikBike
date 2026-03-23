@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../core/controller.php';
-require_once __DIR__ . '/../models/Motos.php';
+require_once __DIR__ . '/../models/motos.php';
 
 class MotosController extends Controller {
 
