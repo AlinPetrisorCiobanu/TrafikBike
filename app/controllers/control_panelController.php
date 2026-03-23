@@ -3,7 +3,7 @@
 require_once __DIR__ . '/../core/controller.php';
 require_once __DIR__ . '/../models/user.php';
 
-class ControlPanelController extends Controller {
+class control_panelController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 

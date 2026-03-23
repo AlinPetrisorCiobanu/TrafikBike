@@ -2,6 +2,8 @@ footer{
 background:#0f0f0f;
 color:white;
 font-family:Arial, Helvetica, sans-serif;
+position: relative;
+z-index: 12;
 }
 
 .footer-container{
