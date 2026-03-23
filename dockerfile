@@ -1,24 +1,29 @@
-# Usamos PHP 8.2 con Apache
+# ────────────── Dockerfile para proyecto MVC PHP ──────────────
+
+# 1️⃣ Base image PHP 8.2 con Apache
 FROM php:8.2-apache
 
-# Instalar extensiones necesarias para MySQL
+# 2️⃣ Instalar extensiones necesarias para MySQL
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
-# Activar mod_rewrite para que las rutas "amigables" funcionen
+# 3️⃣ Activar mod_rewrite para rutas amigables
 RUN a2enmod rewrite
 
-# Copiar el proyecto al contenedor
+# 4️⃣ Copiar todo el proyecto al contenedor
 COPY . /var/www/html/
 
-# Definir la carpeta pública como raíz del documento
-WORKDIR /var/www/html/public
+# 5️⃣ Dar permisos correctos a todo el proyecto
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 755 /var/www/html
 
-# Actualizar la configuración de Apache para apuntar a la carpeta public
+# 6️⃣ Establecer directorio de trabajo
+WORKDIR /var/www/html
+
+# 7️⃣ Configurar Apache para usar public como DocumentRoot
 RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/000-default.conf
 
-# Dar permisos correctos (opcional pero recomendado)
-RUN chown -R www-data:www-data /var/www/html/public \
-    && chmod -R 755 /var/www/html/public
-
-# Exponer puerto 80
+# 8️⃣ Exponer puerto 80
 EXPOSE 80
+
+# 9️⃣ Iniciar Apache en foreground
+CMD ["apache2-foreground"]
