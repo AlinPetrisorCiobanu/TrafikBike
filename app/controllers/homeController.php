@@ -1,12 +1,12 @@
 <?php
+require_once __DIR__ . "/../core/controller.php";
 
-class homecontroller {
-
+class homecontroller extends Controller
+{
     public function index()
     {
-
-        require "../views/home/index.php";
-
+        $this->view("home/index", [
+            "styles" => ["index.css"]
+        ]);
     }
-
 }

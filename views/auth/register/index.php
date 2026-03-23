@@ -1,7 +1,3 @@
-<?php 
-    include __DIR__ . "/../../layouts/header.php"
-?>
-
 <div id="form_reg">
     <form id="register_form" action="<?= BASE_URL ?>/register" method="post">
         <div class="form_group full">
@@ -57,7 +53,3 @@
         </div>
     </form>
 </div>
-
-<?php 
-    include __DIR__ . "/../../layouts/footer.php"
-?>

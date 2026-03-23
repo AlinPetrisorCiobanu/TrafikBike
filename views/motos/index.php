@@ -1,7 +1,3 @@
-<?php 
-    include __DIR__ . "/../layouts/header.php"
-?>
-
 <h1 class="h_motos">Motos en Venta</h1>
 
 <div class="contenedor-motos">
@@ -59,7 +55,3 @@
 <?php endif; ?>
 
 </div>
-
-<?php 
-    include __DIR__ . "/../layouts/footer.php"
-?>

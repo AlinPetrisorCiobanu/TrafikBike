@@ -1,32 +1,41 @@
 <?php
-session_start();
-require_once __DIR__ . '/../models/cart.php';
 
-class CartController {
+require_once __DIR__ . '/../core/controller.php';
+require_once __DIR__ . '/../models/Cart.php';
+
+class CartController extends Controller {
+
     private $cartModel;
 
     public function __construct(){
         $this->cartModel = new Cart();
     }
 
-    // --- Devuelve el carrito completo ---
-    public function getCart(){
+    // =========================
+    // Helpers internos
+    // =========================
+
+    private function json($data){
         header('Content-Type: application/json');
+        echo json_encode($data);
+        exit;
+    }
 
+    private function requireAuth(){
         if(!isset($_SESSION['id'])){
-            echo json_encode([
-                'count'=>0,
-                'total'=>0,
-                'data'=>[]
+            $this->json([
+                'success' => false,
+                'message' => 'No hay usuario logueado'
             ]);
-            exit;
         }
+        return $_SESSION['id'];
+    }
 
-        $userId = $_SESSION['id'];
-        $items = $this->cartModel->getCartItems($userId);
-        $summary = $this->cartModel->getCartSummary($userId);
+    private function getRequestData(){
+        return json_decode(file_get_contents("php://input"), true) ?? [];
+    }
 
-        // Formato de los productos del carrito
+    private function formatCart($items, $summary){
         $cart = [
             'count' => intval($summary['count'] ?? 0),
             'total' => floatval($summary['total'] ?? 0),
@@ -44,85 +53,119 @@ class CartController {
             ];
         }
 
-        echo json_encode($cart);
+        return $cart;
     }
 
-    // --- Añadir producto ---
-    public function ajaxAdd(){
-        header('Content-Type: application/json');
+    // =========================
+    // Endpoints
+    // =========================
+
+    public function getCart(){
 
         if(!isset($_SESSION['id'])){
-            echo json_encode(['success'=>false,'message'=>'No hay usuario logueado']);
-            exit;
+            return $this->json([
+                'count'=>0,
+                'total'=>0,
+                'data'=>[]
+            ]);
         }
 
         $userId = $_SESSION['id'];
-        $data = json_decode(file_get_contents("php://input"), true);
+
+        $items = $this->cartModel->getCartItems($userId);
+        $summary = $this->cartModel->getCartSummary($userId);
+
+        return $this->json($this->formatCart($items, $summary));
+    }
+
+    public function ajaxAdd(){
+
+        $userId = $this->requireAuth();
+        $data = $this->getRequestData();
+
         $itemId = intval($data['id'] ?? 0);
+
+        if(!$itemId){
+            return $this->json([
+                'success' => false,
+                'message' => 'ID inválido'
+            ]);
+        }
 
         $added = $this->cartModel->addItem($userId, $itemId);
 
-        if($added){
-            $items = $this->cartModel->getCartItems($userId);
-            $summary = $this->cartModel->getCartSummary($userId);
-            $item = array_filter($items, fn($i)=>$i['id_equipamiento']==$itemId);
-            $item = array_values($item)[0] ?? null;
-
-            echo json_encode([
-                'success'=>true,
-                'id_item' => $itemId,
-                'cantidad'=>$item['cantidad'] ?? 0,
-                'precio' => $item['precio_unitario'],
-                'precio_final'=>$item['precio_final'] ?? 0,
-                'total'=>floatval($summary['total']),
-                'count'=>intval($summary['count']),
-                'nombre'=>$item['nombre'] ?? '',
-                'categoria'=>$item['categoria'] ?? ''
+        if(!$added){
+            return $this->json([
+                'success'=>false,
+                'message'=>'No se pudo añadir el producto'
             ]);
-        } else {
-            echo json_encode(['success'=>false,'message'=>'No se pudo añadir el producto']);
         }
+
+        $items = $this->cartModel->getCartItems($userId);
+        $summary = $this->cartModel->getCartSummary($userId);
+
+        $item = array_values(array_filter(
+            $items,
+            fn($i) => $i['id_equipamiento'] == $itemId
+        ))[0] ?? null;
+
+        return $this->json([
+            'success'=>true,
+            'id_item' => $itemId,
+            'cantidad'=>$item['cantidad'] ?? 0,
+            'precio' => $item['precio_unitario'] ?? 0,
+            'precio_final'=>$item['precio_final'] ?? 0,
+            'total'=>floatval($summary['total']),
+            'count'=>intval($summary['count']),
+            'nombre'=>$item['nombre'] ?? '',
+            'categoria'=>$item['categoria'] ?? ''
+        ]);
     }
 
-    // --- Actualizar producto ---
     public function ajaxUpdate(){
-        header('Content-Type: application/json');
 
-        if(!isset($_SESSION['id'])){
-            echo json_encode(['success'=>false,'message'=>'No hay usuario logueado']);
-            exit;
-        }
+        $userId = $this->requireAuth();
+        $data = $this->getRequestData();
 
-        $userId = $_SESSION['id'];
-        $data = json_decode(file_get_contents("php://input"), true);
         $itemId = intval($data['id'] ?? 0);
         $action = $data['action'] ?? '';
 
-        $updated = $this->cartModel->updateItem($userId, $itemId, $action);
-
-        if($updated){
-            $items = $this->cartModel->getCartItems($userId);
-            $summary = $this->cartModel->getCartSummary($userId);
-            $item = array_filter($items, fn($i)=>$i['id_equipamiento']==$itemId);
-            $item = array_values($item)[0] ?? null;
-
-            echo json_encode([
-                'success'=>true,
-                'deleted'=>($action=='remove'),
-                'cantidad'=>$item['cantidad'] ?? 0,
-                'precio_final'=>$item['precio_final'] ?? 0,
-                'total'=>floatval($summary['total']),
-                'count'=>intval($summary['count'])
-            ]);
-        } else {
-            echo json_encode([
+        if(!$itemId || !$action){
+            return $this->json([
                 'success'=>false,
-            'message'=>'No se pudo actualizar el producto',
-            'user'=>$userId,
-            'producto'=>$itemId,
-            'action'=>$action
+                'message'=>'Datos inválidos'
             ]);
         }
+
+        $updated = $this->cartModel->updateItem($userId, $itemId, $action);
+
+        if(!$updated){
+            return $this->json([
+                'success'=>false,
+                'message'=>'No se pudo actualizar el producto',
+                'debug'=>[
+                    'user'=>$userId,
+                    'producto'=>$itemId,
+                    'action'=>$action
+                ]
+            ]);
+        }
+
+        $items = $this->cartModel->getCartItems($userId);
+        $summary = $this->cartModel->getCartSummary($userId);
+
+        $item = array_values(array_filter(
+            $items,
+            fn($i) => $i['id_equipamiento'] == $itemId
+        ))[0] ?? null;
+
+        return $this->json([
+            'success'=>true,
+            'deleted'=>($action === 'remove'),
+            'cantidad'=>$item['cantidad'] ?? 0,
+            'precio_final'=>$item['precio_final'] ?? 0,
+            'total'=>floatval($summary['total']),
+            'count'=>intval($summary['count'])
+        ]);
     }
 }
-?>

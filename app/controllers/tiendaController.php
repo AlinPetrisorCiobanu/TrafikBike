@@ -1,26 +1,23 @@
 <?php
-require_once __DIR__ . '/../models/tienda.php';
-class tiendaController {
 
-    public function index()
-    {
-        $productoModel = new Tienda();
-        $productos = $productoModel->getAllProductos();
+require_once __DIR__ . '/../core/controller.php';
+require_once __DIR__ . '/../models/Tienda.php';
 
-        if($productos){
-            $resultado = [
-                "success" => true,
-                "data" => $productos
-            ];
-        } else {
-            $resultado = [
-                "success" => false,
-                "message" => "No se pudieron cargar los Productos"
-            ];
-        }
+class TiendaController extends Controller {
 
-        require "../views/tienda/index.php";
+    private $productoModel;
 
+    public function __construct() {
+        $this->productoModel = new Tienda();
     }
 
+    public function index() {
+        $productos = $this->productoModel->getAllProductos();
+
+        return $this->view("tienda/index", [
+            "styles"   => ["tienda.css"],
+            "productos"=> $productos ?? [],
+            "error"    => $productos ? null : "No se pudieron cargar los productos"
+        ]);
+    }
 }

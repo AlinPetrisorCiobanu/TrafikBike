@@ -1,7 +1,3 @@
-<?php 
-    include __DIR__ . "/../layouts/header.php"
-?>
-
 <h1>Contacto</h1>
 
 <section class="contact-section">
@@ -29,7 +25,3 @@
         </form>
     </div>
 </section>
-
-<?php 
-    include __DIR__ . "/../layouts/footer.php"
-?>

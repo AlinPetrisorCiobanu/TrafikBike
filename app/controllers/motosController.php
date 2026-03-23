@@ -1,25 +1,24 @@
 <?php
-require_once __DIR__ . '/../models/motos.php';
-class motosController {
+
+require_once __DIR__ . '/../core/controller.php';
+require_once __DIR__ . '/../models/Motos.php';
+
+class MotosController extends Controller {
+
+    private $motoModel;
+
+    public function __construct(){
+        $this->motoModel = new Moto();
+    }
 
     public function index()
     {
-        $motoModel = new Moto();
-        $motos = $motoModel->getAllMotos();
+        $motos = $this->motoModel->getAllMotos();
 
-        if($motos){
-            $resultado = [
-                "success" => true,
-                "data" => $motos
-            ];
-        } else {
-            $resultado = [
-                "success" => false,
-                "message" => "No se pudieron cargar las motos"
-            ];
-        }
-
-        require "../views/motos/index.php";
+        return $this->view("motos/index", [
+            "styles" => ["motos.css"],
+            "motos" => $motos ?? [],
+            "error" => $motos ? null : "No se pudieron cargar las motos"
+        ]);
     }
-
 }

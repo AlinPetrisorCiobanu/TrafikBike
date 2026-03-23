@@ -1,62 +1,66 @@
 <?php
-session_start();
-require_once __DIR__ . '/../models/user.php';
 
-class AuthController {
+require_once __DIR__ . '/../core/controller.php';
+require_once __DIR__ . '/../models/User.php';
+
+class AuthController extends Controller {
 
     private $userModel;
 
-    public function __construct(){
+    public function __construct() {
         $this->userModel = new User();
     }
 
-    public function index(){
-        {
-            require "../views/auth/login/index.php";
-        }
+    // Mostrar formulario de login
+    public function index() {
+        return $this->view("auth/login/index", [
+            "styles" => ["login.css"]
+        ]);
     }
-
 
     // Procesar login
-   public function login(){
-    $user_login = $_POST['user_login'] ?? '';
-    $pass = $_POST['pass'] ?? '';
-
-    $user = $this->userModel->login($user_login, $pass);
-
-    if($user){
-        // verificar contraseña usando la variable correcta
-        if (!password_verify($pass, $user['password_hash'])) {
-            $_SESSION['login_error'] = 'Usuario o contraseña incorrectos';
-            header('Location: ' . BASE_URL . '/login');
-            exit;
+    public function login() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            return $this->redirect( BASE_URL . '/login');
         }
 
-        // generar token personalizado
+        $user_login = $_POST['user_login'] ?? '';
+        $pass       = $_POST['pass'] ?? '';
+
+        if (empty($user_login) || empty($pass)) {
+            $_SESSION['login_error'] = "Todos los campos son obligatorios";
+            return $this->redirect( BASE_URL . '/login');
+        }
+
+        // Buscar usuario en DB
+        $user = $this->userModel->login($user_login, $pass);
+
+        if (!$user) {
+            $_SESSION['login_error'] = "Usuario o contraseña incorrectos";
+            return $this->redirect( BASE_URL . '/login');
+        }
+
+        // Generar token para la sesión
         $token = bin2hex(random_bytes(32));
 
-        $_SESSION['id'] = $user["id_user"];
-        $_SESSION['id_role'] = $user["id_role"];
-        $_SESSION['rol'] = $user["rol"];
-        $_SESSION['nombre'] = $user["nombre"];
-        $_SESSION['email'] = $user["email"];
-        $_SESSION['usuario'] = $user["usuario"];
+        // Guardar datos en sesión
+        $_SESSION['id']        = $user["id_user"];
+        $_SESSION['id_role']   = $user["id_role"];
+        $_SESSION['rol']       = $user["rol"];
+        $_SESSION['nombre']    = $user["nombre"];
+        $_SESSION['email']     = $user["email"];
+        $_SESSION['usuario']   = $user["usuario"];
         $_SESSION['is_active'] = $user["is_active"];
-        $_SESSION['token'] = $token;
+        $_SESSION['token']     = $token;
 
-        header('Location: ' . BASE_URL . '/');
-        exit;
-    } else {
-        $_SESSION['login_error'] = "Usuario o contraseña incorrectos";
-        header('Location: ' . BASE_URL . '/login');
-        exit;
+        // Redirigir al home
+        return $this->redirect(BASE_URL . '/');
     }
-}
 
-    public function logout(){ 
-        session_unset();     
-        session_destroy();     
-        header('Location: ' . BASE_URL . '/');
-        exit;
+    // Cerrar sesión
+    public function logout() {
+        session_unset();
+        session_destroy();
+        return $this->redirect(BASE_URL . '/');
     }
 }

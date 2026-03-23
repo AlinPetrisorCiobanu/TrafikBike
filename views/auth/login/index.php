@@ -1,7 +1,3 @@
-<?php 
-    include __DIR__ . "/../../layouts/header.php"
-?>
-
  <div id="form_login">
             <form id="login_form" action="<?= BASE_URL ?>/login" method="post">
                 <h2>Iniciar Sesión</h2>
@@ -24,8 +20,3 @@
         </div>
 
         <div id="modal_login"></div>
-
-
-<?php 
-    include __DIR__ . "/../../layouts/footer.php"
-?>
