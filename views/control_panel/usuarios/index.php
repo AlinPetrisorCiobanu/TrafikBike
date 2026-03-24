@@ -11,46 +11,8 @@
             header('Location: ' . BASE_URL . '/');
             exit;
         }
-
-    include __DIR__ . "/../../layouts/header.php"
 ?>
 
-
-
-<nav class="sidebar">
-    <ul>
-        <li>
-            <a href="<?= BASE_URL ?>/control/panel">
-                <span class="icon">🏠</span>
-                <span class="text">Home</span>
-            </a>
-        </li>
-        <li>
-            <a href="<?= BASE_URL ?>/control/panel/usuarios" class="active">
-                <span class="icon">👤</span>
-                <span class="text">Usuarios</span>
-            </a>
-        </li>
-        <li>
-            <a href="<?= BASE_URL ?>/control/panel/motos">
-                <span class="icon">🏍️</span>
-                <span class="text">Motos</span>
-            </a>
-        </li>
-        <li>
-            <a href="<?= BASE_URL ?>/control/panel/tienda">
-                <span class="icon">🛒</span>
-                <span class="text">Tienda</span>
-            </a>
-        </li>
-        <li>
-            <a href="<?= BASE_URL ?>/control/panel/taller">
-                <span class="icon">🔧</span>
-                <span class="text">Taller</span>
-            </a>
-        </li>
-    </ul>
-</nav>
 
 <main>
     <h1 class="h_controlPanel">Control Panel - Usuarios</h1>
@@ -88,7 +50,3 @@
     </tbody>
 </table>
 </main>
-
-<?php 
-    include __DIR__ . "/../../layouts/footer.php"
-?>

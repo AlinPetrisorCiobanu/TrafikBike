@@ -8,6 +8,7 @@
 
                 $layout = $options['layout'] ?? 'main';
 
+
                 require_once __DIR__ . "/../../views/layouts/$layout.php";
             }
         

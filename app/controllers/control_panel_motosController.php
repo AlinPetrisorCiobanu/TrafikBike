@@ -1,9 +1,9 @@
 <?php
 
 require_once __DIR__ . '/../core/controller.php';
-require_once __DIR__ . '/../models/user.php';
+require_once __DIR__ . '/../models/motos.php';
 
-class control_panel_usuariosController extends Controller {
+class control_panel_motosController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 
@@ -19,17 +19,15 @@ class control_panel_usuariosController extends Controller {
             return $this->redirect('/');
         }
 
-        $userModel = new User();
-        $users = $userModel->getAllUsers() ;
+        $motoModel = new Moto();
+        $motos = $motoModel->getAllMotos() ;
 
         // ✅ Render vista con layout
-        return $this->view("control_panel/usuarios/index", [
-            "styles" => [
-                            "control_panel/control_panel.css",
-                            "control_panel/usuarios.css"
-                        ],
-            "active" => "usuarios",
-            "users" => $users
+        return $this->view("control_panel/motos/index", [
+            "styles" => ["control_panel/control_panel.css",
+                        "control_panel/motos.css"],
+            "active" => "motos",
+            "motos" => $motos
         ],[
             "layout" => "control_panel"
         ]);

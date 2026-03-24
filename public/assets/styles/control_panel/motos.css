@@ -1,0 +1,138 @@
+/* =========================
+   TABLA
+========================= */
+
+.motos-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    color: #111827;
+}
+
+.motos-table thead {
+    background: #111827;
+    color: #fff;
+}
+
+.motos-table th,
+.motos-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.motos-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: 0.2s;
+}
+
+.motos-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* =========================
+   COLUMNAS
+========================= */
+
+/* Moto */
+.moto-col strong {
+    font-size: 14px;
+    color: #111827;
+}
+
+/* Ficha técnica */
+.ficha-col {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.ficha-col div {
+    margin-bottom: 3px;
+}
+
+/* Características */
+.caract-col {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Tags */
+.tag {
+    font-size: 11px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    background: #f3f4f6;
+}
+
+/* Colores de tags */
+.tipo {
+    background: #e0f2fe;
+    color: #0369a1;
+}
+
+.permiso {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.color {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+/* =========================
+   ESTADO
+========================= */
+
+.estado {
+    font-size: 12px;
+    font-weight: bold;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+/* Ajusta según tus valores reales */
+.estado.disponible {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.estado.reservado {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.estado.vendido {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* =========================
+   ACCIONES
+========================= */
+
+.actions a {
+    margin-right: 8px;
+    text-decoration: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.actions a:hover {
+    transform: scale(1.2);
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.motos-table td[colspan] {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}
