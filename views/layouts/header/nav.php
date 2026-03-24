@@ -10,7 +10,7 @@
         <ul class="menu" id="menu">
             <?php if($rol == "SUPER_ADMIN"||$rol == "ADMNI" || $rol == "VENDEDOR" || $rol == "MECANICO"){
                 ?>
-                    <li><a href="<?= BASE_URL ?>/contro/panel">Control Panel</a></li>
+                    <li><a href="<?= BASE_URL ?>/control/panel">Control Panel</a></li>
                 <?php
             } ?>
             <li><a href="<?= BASE_URL ?>/">Inicio</a></li>

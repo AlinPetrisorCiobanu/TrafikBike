@@ -2,14 +2,14 @@
 
     class Controller
     {
-        public function view($view, $data = [])
-        {
-            extract($data);
+        public function view($view, $data = [], $options = []){
 
-            require_once __DIR__ . "/../../views/layouts/header.php";
-            require_once __DIR__ . "/../../views/$view.php";
-            require_once __DIR__ . "/../../views/layouts/footer.php";
-        }
+                extract($data);
+
+                $layout = $options['layout'] ?? 'main';
+
+                require_once __DIR__ . "/../../views/layouts/$layout.php";
+            }
         
         // Redirección centralizada
         protected function redirect($path) {

@@ -54,7 +54,7 @@ $router->post('/updatecart', 'cartController@ajaxUpdate');
 |----------------------------
 */
 
-$router->get('/contro/panel', 'control_panelController@index');
+$router->get('/control/panel', 'control_panelController@index');
 
 /*
 |----------------------------
@@ -81,6 +81,10 @@ $router->post('/control/panel/tienda/eliminar', 'control_panel_tiendaController@
 $router->get('/control/panel/taller', 'control_panel_tallerController@index');
 $router->post('/control/panel/taller/modificar', 'control_panel_tallerController@modificar');
 $router->post('/control/panel/taller/eliminar', 'control_panel_tallerController@eliminar');
+
+/*    Trabajadores    */
+$router->get('/control/panel/workers', 'control_panel_workersController@index');
+$router->post('/control/panel/addWorker', 'control_panel_workersController@addWorker');
 
 
 $router->dispatch();

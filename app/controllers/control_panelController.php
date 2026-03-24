@@ -20,7 +20,10 @@ class control_panelController extends Controller {
 
         // ✅ Render vista con layout
         return $this->view("control_panel/index", [
-            "styles" => ["control_panel/control_panel.css"]
+            "styles" => ["control_panel/control_panel.css"],
+            "active" => "home"
+        ],[
+            "layout" => "control_panel"
         ]);
     }
 }
