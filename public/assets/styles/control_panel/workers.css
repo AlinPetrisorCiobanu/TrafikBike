@@ -1,0 +1,106 @@
+/* Contenedor principal */
+.worker-form-container {
+    max-width: 600px; /* ancho máximo */
+    width: 90%; /* ancho relativo en pantallas pequeñas */
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    margin-top: 140px;
+    margin-bottom: 140px;
+}
+
+/* Título */
+.worker-form-container h2 {
+    text-align: center;
+    margin-bottom: 25px;
+    color: #111827;
+}
+
+/* Alertas */
+.alert {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.alert.success { background-color: #d1fae5; color: #065f46; }
+.alert.error { background-color: #fee2e2; color: #991b1b; }
+
+/* Formulario */
+.worker-form-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Labels */
+.worker-form-container label {
+    margin-top: 12px;
+    margin-bottom: 6px;
+    font-weight: bold;
+    color: #111827;
+}
+
+/* Inputs y selects */
+.worker-form-container input,
+.worker-form-container select {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    width: 100%;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.worker-form-container input:focus,
+.worker-form-container select:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    outline: none;
+}
+
+/* Botón */
+.worker-form-container button {
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #3b82f6;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.worker-form-container button:hover {
+    background-color: #2563eb;
+}
+
+/* Campo extra dinámico */
+#extra-field-container {
+    margin-top: 10px;
+}
+
+/* Responsive: en móviles */
+@media (max-width: 500px) {
+    .worker-form-container {
+        padding: 20px;
+    }
+
+    .worker-form-container h2 {
+        font-size: 22px;
+    }
+
+    .worker-form-container input,
+    .worker-form-container select,
+    .worker-form-container button {
+        font-size: 15px;
+        padding: 8px;
+    }
+}

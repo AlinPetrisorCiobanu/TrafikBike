@@ -17,4 +17,9 @@
 
 <main>
     <h1 class="h_controlPanel">Control Panel</h1>
+    <div class="submenu">
+        <ul>
+            <li><a href="<?= BASE_URL ?>/control/panel/workers">Añadir nuevos trabajadores</a></li>
+        </ul>
+    </div>
 </main>
