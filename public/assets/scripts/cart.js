@@ -7,8 +7,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const cartContent = document.getElementById("cart-content");
     const cartCount = document.getElementById("cart-count");
     const cartTotal = document.getElementById("cart-total");
-    // const BASE_URL = "/practicas/trafikbike/public";
-    const BASE_URL = "";
+    const BASE_URL = "/practicas/trafikbike/public";
+    // const BASE_URL = "";
 
     // --- VARIABLE GLOBAL DEL CARRITO ---
     let $cart = {

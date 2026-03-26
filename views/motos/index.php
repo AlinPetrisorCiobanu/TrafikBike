@@ -41,7 +41,7 @@
             <!-- Precio + acción -->
             <div class="moto-footer">
                 <span class="precio"><?= number_format($moto["precio"]); ?> €</span>
-                <button class="btn-ver">Ver detalles</button>
+                <a href="<?= BASE_URL ?>/moto?id=<?= $moto["id_moto"]; ?>" class="btn-ver">Ver detalles</a>
             </div>
 
         </div>

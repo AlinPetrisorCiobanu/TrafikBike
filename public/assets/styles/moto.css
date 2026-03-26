@@ -1,0 +1,113 @@
+/* CONTENEDOR PRINCIPAL - altura completa de la ventana */
+.detalle-moto {
+    display: flex;
+    flex-wrap: nowrap;
+    width: 100%;
+    height: 70dvh;
+    margin: 0 auto;
+    padding: 0 20px;
+    gap: 30px;
+    justify-content: center;
+    align-items: stretch;
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+/* IMAGEN PRINCIPAL - izquierda */
+.detalle-moto .moto-img {
+    flex: 0 0 50%; /* mitad izquierda */
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    background: var(--bgc-cards);
+    position: relative;
+}
+
+.detalle-moto .moto-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center;
+    transition: transform 0.5s ease;
+}
+
+/* HOVER */
+.detalle-moto .moto-img:hover img {
+    transform: scale(1.02);
+}
+
+/* DETALLES - derecha */
+.detalle-moto .moto-info {
+    flex: 0 0 50%; /* mitad derecha */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* detalles arriba */
+    background: var(--bgc-cards);
+    border-radius: 16px;
+    padding: 40px 30px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    color: #ddd;
+    height: 100%; /* misma altura que la imagen */
+    overflow-y: auto; /* scroll si hay mucho contenido */
+}
+
+/* TITULO */
+.detalle-moto .moto-info h2 {
+    margin: 0 0 25px 0;
+    font-size: 2.2rem;
+    color: var(--bgc-buttons);
+}
+
+/* DETALLES PÁRRAFOS */
+.detalle-moto .moto-info p {
+    margin: 8px 0;
+    font-size: 1.2rem;
+}
+
+/* BOTONES ABAJO */
+.detalle-moto .moto-info .btn-container {
+    margin-top: auto; /* fuerza que se quede al final */
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.detalle-moto .btn-volver,
+.detalle-moto .btn-comprar {
+    display: inline-block;
+    background: linear-gradient(135deg, #ff4d00, #ff1e00);
+    border: none;
+    color: #fff;
+    padding: 14px 30px;
+    border-radius: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.detalle-moto .btn-volver:hover,
+.detalle-moto .btn-comprar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255,60,0,0.4);
+}
+
+/* RESPONSIVE - móviles y tablets */
+@media (max-width: 1100px) {
+    .detalle-moto {
+        flex-direction: column;
+        height: auto; /* altura automática en móvil */
+        gap: 30px;
+    }
+
+    .detalle-moto .moto-img,
+    .detalle-moto .moto-info {
+        flex: 1 1 100%;
+        height: auto;
+    }
+
+    .detalle-moto .btn-container {
+        align-items: center;
+    }
+}
