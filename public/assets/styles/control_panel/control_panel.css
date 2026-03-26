@@ -1,4 +1,6 @@
-
+body{
+    background-color: #111827 !important;
+}
 /* Sidebar */
 .sidebar {
     width: 250px;
@@ -49,7 +51,7 @@
 }
 
 /* MAIN al lado del sidebar */
-main {
+#main_control {
     margin-left: 250px;
     padding: 20px;
     min-height: 90dvh;
@@ -59,3 +61,46 @@ main {
 .h_controlPanel {
     margin-top: 100px;
 }
+
+main {
+        text-align: center;
+    }
+
+    .h_controlPanel {
+        margin-bottom: 40px;
+        color: #ece9e9;
+    }
+
+    .submenu ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        gap: 20px;
+        justify-content: center;
+    }
+
+    .submenu a {
+        display: inline-block;
+        padding: 18px 28px;
+        background: #007bff;
+        color: white;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        min-width: 220px;
+    }
+
+    .submenu a:hover {
+        background: #0056b3;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.15);
+    }
+
+    /* Responsive (móvil) */
+    @media (max-width: 768px) {
+        .submenu ul {
+            flex-direction: column;
+        }
+    }

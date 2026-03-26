@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../core/controller.php';
-require_once __DIR__ . '/../models/tienda.php';
+require_once __DIR__ . '/../../core/controller.php';
+require_once __DIR__ . '/../../models/motos.php';
 
-class control_panel_tallerController extends Controller {
+class motosController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 
@@ -19,12 +19,15 @@ class control_panel_tallerController extends Controller {
             return $this->redirect('/');
         }
 
+        $motoModel = new Moto();
+        $motos = $motoModel->getAllMotos() ;
+
         // ✅ Render vista con layout
-        return $this->view("control_panel/taller/index", [
-            "styles" => [
-                "control_panel/control_panel.css"
-            ],
-            "active" => "taller"
+        return $this->view("control_panel/motos/index", [
+            "styles" => ["control_panel/control_panel.css",
+                        "control_panel/motos.css"],
+            "active" => "motos",
+            "motos" => $motos
         ],[
             "layout" => "control_panel"
         ]);

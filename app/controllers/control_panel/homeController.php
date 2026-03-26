@@ -1,8 +1,8 @@
 <?php
 
-require_once __DIR__ . '/../core/controller.php';
+require_once __DIR__ . '/../../core/controller.php';
 
-class control_panelController extends Controller {
+class homeController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 

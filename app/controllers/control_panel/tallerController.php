@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../core/controller.php';
-require_once __DIR__ . '/../models/user.php';
+require_once __DIR__ . '/../../core/controller.php';
+require_once __DIR__ . '/../../models/tienda.php';
 
-class control_panel_usuariosController extends Controller {
+class tallerController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 
@@ -19,17 +19,12 @@ class control_panel_usuariosController extends Controller {
             return $this->redirect('/');
         }
 
-        $userModel = new User();
-        $users = $userModel->getAllUsers() ;
-
         // ✅ Render vista con layout
-        return $this->view("control_panel/usuarios/index", [
+        return $this->view("control_panel/taller/index", [
             "styles" => [
-                            "control_panel/control_panel.css",
-                            "control_panel/usuarios.css"
-                        ],
-            "active" => "usuarios",
-            "users" => $users
+                "control_panel/control_panel.css"
+            ],
+            "active" => "taller"
         ],[
             "layout" => "control_panel"
         ]);

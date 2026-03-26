@@ -1,106 +1,125 @@
-/* Contenedor principal */
+/* Fondo dashboard */
+body {
+    background: #eef2f7;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* Contenedor */
 .worker-form-container {
-    max-width: 600px; /* ancho máximo */
-    width: 90%; /* ancho relativo en pantallas pequeñas */
-    margin: 40px auto;
-    padding: 30px;
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    font-family: Arial, sans-serif;
-    margin-top: 140px;
-    margin-bottom: 140px;
+    max-width: 900px;
+    width: 95%;
+    margin: 60px auto;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+    border: 1px solid #e5e7eb;
 }
 
 /* Título */
 .worker-form-container h2 {
     text-align: center;
-    margin-bottom: 25px;
-    color: #111827;
+    margin-bottom: 35px;
+    color: #1f2937;
+    font-size: 26px;
 }
 
-/* Alertas */
-.alert {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 6px;
-    text-align: center;
-    font-weight: bold;
-}
-
-.alert.success { background-color: #d1fae5; color: #065f46; }
-.alert.error { background-color: #fee2e2; color: #991b1b; }
-
-/* Formulario */
+/* Form grid */
 .worker-form-container form {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 25px;
+}
+
+/* Campos que ocupan toda la fila */
+.full-width {
+    grid-column: span 2;
 }
 
 /* Labels */
 .worker-form-container label {
-    margin-top: 12px;
-    margin-bottom: 6px;
-    font-weight: bold;
-    color: #111827;
+    font-size: 13px;
+    font-weight: 600;
+    color: #6b7280;
+    margin-bottom: 5px;
 }
 
-/* Inputs y selects */
+/* Inputs */
 .worker-form-container input,
 .worker-form-container select {
-    padding: 10px;
-    font-size: 16px;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
     width: 100%;
-    box-sizing: border-box;
-    transition: border-color 0.2s, box-shadow 0.2s;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    background: #f9fafb;
+    font-size: 14px;
+    transition: all 0.25s ease;
 }
 
+/* Focus */
 .worker-form-container input:focus,
 .worker-form-container select:focus {
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    background: #fff;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
     outline: none;
 }
 
 /* Botón */
 .worker-form-container button {
-    margin-top: 20px;
-    padding: 12px;
+    grid-column: span 2;
+    margin-top: 15px;
+    padding: 15px;
     font-size: 16px;
-    font-weight: bold;
-    color: #ffffff;
-    background-color: #3b82f6;
+    font-weight: 600;
     border: none;
-    border-radius: 6px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    color: white;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.3s ease;
 }
 
 .worker-form-container button:hover {
-    background-color: #2563eb;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
 }
 
-/* Campo extra dinámico */
+/* Alertas */
+.alert {
+    grid-column: span 2;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.alert.success { 
+    background: #ecfdf5; 
+    color: #065f46; 
+    border: 1px solid #10b981;
+}
+
+.alert.error { 
+    background: #fef2f2; 
+    color: #991b1b; 
+    border: 1px solid #ef4444;
+}
+
+/* Campo dinámico */
 #extra-field-container {
-    margin-top: 10px;
+    grid-column: span 2;
 }
 
-/* Responsive: en móviles */
-@media (max-width: 500px) {
-    .worker-form-container {
-        padding: 20px;
+/* Responsive */
+@media (max-width: 768px) {
+    .worker-form-container form {
+        grid-template-columns: 1fr;
     }
 
-    .worker-form-container h2 {
-        font-size: 22px;
-    }
-
-    .worker-form-container input,
-    .worker-form-container select,
-    .worker-form-container button {
-        font-size: 15px;
-        padding: 8px;
+    .full-width,
+    .worker-form-container button,
+    #extra-field-container {
+        grid-column: span 1;
     }
 }

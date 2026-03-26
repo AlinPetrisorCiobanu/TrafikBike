@@ -36,11 +36,41 @@ class Router {
 
             $action = $this->routes[$method][$url];
 
-            list($controller, $method) = explode('@', $action);
+            list($controllerPath, $method) = explode('@', $action);
 
-            require_once ROOT_PATH."/app/controllers/".$controller.".php";
+            // Convertir namespace tipo ControlPanel/DashboardController
+            $controllerPath = str_replace('\\', '/', $controllerPath);
 
-            $controller = new $controller();
+            // Separar carpeta(s) y clase
+            $parts = explode('/', $controllerPath);
+            $controllerName = array_pop($parts);
+            $directory = implode('/', $parts);  
+
+            // Construir ruta del archivo
+            $filePath = ROOT_PATH . "/app/controllers/";
+
+            if (!empty($directory)) {
+                $filePath .= strtolower($directory) . "/";
+            }
+
+            $filePath .= $controllerName . ".php";
+
+            if (!file_exists($filePath)) {
+                echo "Controlador no encontrado";
+                return;
+            }
+
+            require_once $filePath;
+
+            // Instanciar controlador
+            $controller = new $controllerName();
+
+            if (!method_exists($controller, $method)) {
+                echo "Método no encontrado";
+                return;
+            }
+
+            $controller->$method();
 
             $controller->$method();
 

@@ -1,9 +1,9 @@
 <?php
 
-require_once __DIR__ . '/../core/controller.php';
-require_once __DIR__ . '/../models/workers.php';
+require_once __DIR__ . '/../../core/controller.php';
+require_once __DIR__ . '/../../models/workers.php';
 
-class control_panel_workersController extends Controller {
+class workersController extends Controller {
 
     private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
 

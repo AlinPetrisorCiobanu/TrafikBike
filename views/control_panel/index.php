@@ -15,11 +15,13 @@
 ?>
 
 
-<main>
+<main id="main_control">
     <h1 class="h_controlPanel">Control Panel</h1>
     <div class="submenu">
         <ul>
             <li><a href="<?= BASE_URL ?>/control/panel/workers">Añadir nuevos trabajadores</a></li>
+            <li><a href="<?= BASE_URL ?>/control/panel/workers">Modificar trabajadores</a></li>
+            <li><a href="<?= BASE_URL ?>/control/panel/workers">Dar de baja trabajador</a></li>
         </ul>
     </div>
 </main>
