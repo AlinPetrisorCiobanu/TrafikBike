@@ -1,4 +1,4 @@
-/* GRID */
+/* CONTENEDOR GRID */
 .contenedor-motos {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -6,7 +6,7 @@
     padding: 40px 5%;
 }
 
-/* Título de sección */
+/* TÍTULO DE SECCIÓN */
 .h_motos {
     text-align: center;
     font-size: 48px;
@@ -39,9 +39,9 @@
     position: relative;
     aspect-ratio: 16 / 10;
     overflow: hidden;
+    background: #111;
 }
 
-/* IMAGEN */
 .moto-img img {
     width: 100%;
     height: 100%;
@@ -49,26 +49,11 @@
     transition: transform 0.5s ease;
 }
 
-/* ZOOM HOVER */
 .card-moto:hover .moto-img img {
     transform: scale(1.08);
 }
 
-/* BADGE (oferta/nuevo) */
-.badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: #ff3c00;
-    color: #fff;
-    font-size: 0.75rem;
-    padding: 5px 10px;
-    border-radius: 6px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* INFO */
+/* INFO DE LA MOTO */
 .moto-info {
     padding: 18px 20px 10px;
     color: #ddd;
@@ -109,7 +94,7 @@
     color: var(--bgc-buttons);
 }
 
-/* BOTÓN PRO */
+/* BOTÓN VER DETALLES */
 .btn-ver {
     background: linear-gradient(135deg, #ff4d00, #ff1e00);
     border: none;
@@ -119,6 +104,8 @@
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
 }
 
 .btn-ver:hover {
@@ -126,9 +113,42 @@
     box-shadow: 0 5px 15px rgba(255,60,0,0.4);
 }
 
+/* PAGINACIÓN */
+.paginacion {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.paginacion button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    background: var(--bgc-buttons);
+    color: #fff;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.paginacion button:hover:not(:disabled) {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(255,60,0,0.3);
+}
+
+.paginacion button:disabled {
+    background: #555;
+    cursor: default;
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .contenedor-motos {
         grid-template-columns: 1fr;
+    }
+
+    .paginacion {
+        flex-wrap: wrap;
     }
 }
