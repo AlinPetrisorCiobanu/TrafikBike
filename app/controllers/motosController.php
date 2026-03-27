@@ -10,6 +10,7 @@ class motosController extends Controller {
         $this->motoModel = new Moto();
     }
 
+    // Vista principal de usuario con buscador
     public function index()
     {
         $page = max(1, (int)($_GET['page'] ?? 1));
@@ -18,7 +19,6 @@ class motosController extends Controller {
 
         //-- Recibir filtros
         $filters = [
-            'search' => $_GET['search'] ?? '',
             'id_marca' => $_GET['marca'] ?? '',
             'id_modelo' => $_GET['modelo'] ?? '',
             'km_range' => $_GET['km_range'] ?? '',
@@ -29,7 +29,7 @@ class motosController extends Controller {
             'tipo' => $_GET['tipo'] ?? ''
         ];
 
-        //-- Traer motos
+        //-- Traer motos usando el modelo unificado
         $motos = $this->motoModel->getMotosPaginated($limit, $offset, $filters);
         $totalMotos = $this->motoModel->countMotos($filters);
         $totalPages = ceil($totalMotos / $limit);
@@ -56,7 +56,7 @@ class motosController extends Controller {
             usort($marca['modelos'], fn($a,$b)=> strcmp($a['nombre'],$b['nombre']));
         }
 
-        $queryParams = $_GET; // Para paginación
+        $queryParams = $_GET; // Para mantener la paginación
 
         return $this->view("motos/index", [
             "styles" => ["motos.css","buscador_motos.css"],
@@ -70,10 +70,17 @@ class motosController extends Controller {
         ]);
     }
 
+    // Ver detalles de una moto
     public function ver_moto()
     {
         $id_moto = $_GET['id'] ?? null;
         $moto = $id_moto ? $this->motoModel->getMotoById($id_moto) : null;
+
+        // Para usuario, eliminamos datos sensibles
+        if($moto){
+            unset($moto['matricula'], $moto['vin']);
+        }
+
         return $this->view("motos/moto/index", [
             "styles" => ["moto.css"],
             "motos" => $moto ?? [],

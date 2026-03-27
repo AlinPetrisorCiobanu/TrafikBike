@@ -4,40 +4,39 @@ require_once __DIR__ . '/../../models/motos.php';
 
 class motosController extends Controller {
 
-    private $rolesPermitidos = ["SUPER_ADMIN", "ADMIN", "VENDEDOR", "MECANICO"];
     private $motoModel;
 
     public function __construct(){
         $this->motoModel = new Moto();
     }
 
+    // Listado completo con búsqueda para control panel
     public function index()
     {
-        if (!isset($_SESSION['token']) || !isset($_SESSION['rol'])) {
-            header('Location: ' . BASE_URL . '/login'); exit;
-        }
-        if (!in_array($_SESSION['rol'], $this->rolesPermitidos)) {
-            header('Location: ' . BASE_URL . '/'); exit;
-        }
-
         $page = max(1, (int)($_GET['page'] ?? 1));
-        $limit = 8;
-        $offset = ($page-1)*$limit;
+        $limit = $_GET['limit'] ?? 10;
+        $offset = ($page-1) * $limit;
 
-        // Filtros de búsqueda
+        //-- Recibir filtros (ahora incluye matricula y vin)
         $filters = [
             'matricula' => $_GET['matricula'] ?? '',
-            'vin' => $_GET['vin'] ?? '',
-            'id_marca' => $_GET['marca'] ?? '',
-            'id_modelo' => $_GET['modelo'] ?? ''
+            'vin'       => $_GET['vin'] ?? '',
+            'id_marca'  => $_GET['marca'] ?? '',
+            'id_modelo' => $_GET['modelo'] ?? '',
+            'km_range'  => $_GET['km_range'] ?? '',
+            'anio'      => $_GET['anio'] ?? '',
+            'precio_range' => $_GET['precio_range'] ?? '',
+            'permiso'   => $_GET['permiso'] ?? '',
+            'cilindrada_range' => $_GET['cilindrada_range'] ?? '',
+            'tipo'      => $_GET['tipo'] ?? ''
         ];
 
-        // Buscar motos
-        $motos = $this->motoModel->searchMotos($filters, $limit, $offset);
-        $totalMotos = $this->motoModel->countSearchMotos($filters);
+        //-- Traer motos filtradas
+        $motos = $this->motoModel->getMotosPaginated($limit, $offset, $filters);
+        $totalMotos = $this->motoModel->countMotos($filters);
         $totalPages = ceil($totalMotos / $limit);
 
-        // Marcas y modelos
+        //-- Marcas y modelos
         $marcas_modelo_raw = $this->motoModel->get_marcas_modelos();
         $marcas_modelo = [];
         $marcas_modelo_json = [];
@@ -59,24 +58,24 @@ class motosController extends Controller {
             usort($marca['modelos'], fn($a,$b)=> strcmp($a['nombre'],$b['nombre']));
         }
 
-        $queryParams = $_GET;
+        $queryParams = $_GET; // Para paginación
 
-        return $this->view(
-            "control_panel/motos/index",
-            [
-                "styles" => ["control_panel/control_panel.css","control_panel/motos.css"],
-                "active" => "motos",
-                "motos" => $motos,
-                "marcas_modelo" => $marcas_modelo,
-                "marcas_modelo_json" => json_encode($marcas_modelo_json),
-                "currentPage" => $page,
-                "totalPages" => $totalPages,
-                "filters" => $filters,
-                "queryParams" => $queryParams,
-                "totalMotos" => $totalMotos,
-                "estados" => ['Disponible','Vendido','Reservado']
+        return $this->view("control_panel/motos/index", [
+            "styles" => [
+                "control_panel/control_panel.css",
+                "control_panel/motos.css",
+                "buscador_motos.css"
             ],
-            ["layout" => "control_panel"]
-        );
+            "active" => "motos",
+            "motos" => $motos,
+            "marcas_modelo" => $marcas_modelo,
+            "marcas_modelo_json" => json_encode($marcas_modelo_json),
+            "currentPage" => $page,
+            "totalPages" => $totalPages,
+            "filters" => $filters,
+            "queryParams" => $queryParams
+        ],[
+            "layout" => "control_panel"
+        ]);
     }
 }

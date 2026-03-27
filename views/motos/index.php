@@ -6,7 +6,7 @@
     <select id="marca-select" name="marca">
         <option value="">Todas las marcas</option>
         <?php foreach($marcas_modelo as $id_marca => $marca): ?>
-            <option value="<?= $id_marca ?>" <?= ($filters['id_marca']==$id_marca)?'selected':'' ?>>
+            <option value="<?= $id_marca ?>" <?= ($filters['id_marca'] ?? '') == $id_marca ? 'selected' : '' ?>>
                 <?= htmlspecialchars($marca['nombre_marca']) ?>
             </option>
         <?php endforeach; ?>
@@ -17,16 +17,15 @@
         <option value="">Todos los modelos</option>
     </select>
 
-    <!-- Sliders fila desktop -->
     <div class="sliders-row">
 
         <!-- Kilometraje -->
         <div class="slider-container">
             <label for="km_range">Kilometraje máximo:</label>
             <div class="slider-row">
-                <input type="range" id="km_range" name="km_range" min="0" max="200000" step="1000"
-                    value="<?= $filters['km_range'] ?: 200000 ?>">
-                <span id="km_display" class="slider-value"><?= number_format($filters['km_range'] ?: 200000,0,",",".") ?> km</span>
+                <?php $km = isset($filters['km_range']) && $filters['km_range']!=='' ? $filters['km_range'] : 200000; ?>
+                <input type="range" id="km_range" name="km_range" min="0" max="200000" step="1000" value="<?= $km ?>">
+                <span id="km_display" class="slider-value"><?= number_format($km,0,",",".") ?> km</span>
             </div>
         </div>
 
@@ -34,9 +33,9 @@
         <div class="slider-container">
             <label for="anio">Año mínimo:</label>
             <div class="slider-row">
-                <input type="range" id="anio" name="anio" min="1990" max="<?= date('Y') ?>" step="1"
-                    value="<?= $filters['anio'] ?: 1990 ?>">
-                <span id="anio_display" class="slider-value"><?= $filters['anio'] ?: 1990 ?></span>
+                <?php $anio = isset($filters['anio']) && $filters['anio']!=='' ? $filters['anio'] : 1990; ?>
+                <input type="range" id="anio" name="anio" min="1990" max="<?= date('Y') ?>" step="1" value="<?= $anio ?>">
+                <span id="anio_display" class="slider-value"><?= $anio ?></span>
             </div>
         </div>
 
@@ -44,9 +43,9 @@
         <div class="slider-container">
             <label for="precio_range">Precio máximo (€):</label>
             <div class="slider-row">
-                <input type="range" id="precio_range" name="precio_range" min="0" max="20000" step="500"
-                    value="<?= $filters['precio_range'] ?: 20000 ?>">
-                <span id="precio_display" class="slider-value"><?= number_format($filters['precio_range'] ?: 20000,0,",",".") ?> €</span>
+                <?php $precio = isset($filters['precio_range']) && $filters['precio_range']!=='' ? $filters['precio_range'] : 20000; ?>
+                <input type="range" id="precio_range" name="precio_range" min="0" max="20000" step="500" value="<?= $precio ?>">
+                <span id="precio_display" class="slider-value"><?= number_format($precio,0,",",".") ?> €</span>
             </div>
         </div>
 
@@ -54,28 +53,19 @@
         <div class="slider-container">
             <label for="cilindrada_range">Cilindrada máxima (cc):</label>
             <div class="slider-row">
-                <input type="range" id="cilindrada_range" name="cilindrada_range" min="0" max="3000" step="50"
-                    value="<?= $filters['cilindrada_range'] ?: 3000 ?>">
-                <span id="cilindrada_display" class="slider-value"><?= number_format($filters['cilindrada_range'] ?: 3000,0,",",".") ?> cc</span>
-            </div>
-        </div>
-        <!-- limite por pagina -->
-        <div class="slider-container">
-            <label for="pag_limikt">Mostrar por pagina:</label>
-            <div class="slider-row">
-                <input type="range" id="pag_limikt" name="page_limit" min="0" max="100" step="20"
-                    value="8">
-                <span id="limit_page" class="slider-value"> 100 </span>
+                <?php $cilindrada = isset($filters['cilindrada_range']) && $filters['cilindrada_range']!=='' ? $filters['cilindrada_range'] : 3000; ?>
+                <input type="range" id="cilindrada_range" name="cilindrada_range" min="0" max="3000" step="50" value="<?= $cilindrada ?>">
+                <span id="cilindrada_display" class="slider-value"><?= number_format($cilindrada,0,",",".") ?> cc</span>
             </div>
         </div>
 
-    </div> <!-- fin sliders-row -->
+    </div>
 
     <!-- Permiso -->
     <select name="permiso">
         <option value="">Cualquier permiso</option>
         <?php foreach(['AM','A1','A2','A','B'] as $p): ?>
-            <option value="<?= $p ?>" <?= $filters['permiso']==$p?'selected':'' ?>><?= $p ?></option>
+            <option value="<?= $p ?>" <?= isset($filters['permiso']) && $filters['permiso']==$p ? 'selected' : '' ?>><?= $p ?></option>
         <?php endforeach; ?>
     </select>
 
@@ -83,7 +73,7 @@
     <select name="tipo">
         <option value="">Cualquier tipo</option>
         <?php foreach(['deportiva','custom','naked','trail'] as $t): ?>
-            <option value="<?= $t ?>" <?= $filters['tipo']==$t?'selected':'' ?>><?= ucfirst($t) ?></option>
+            <option value="<?= $t ?>" <?= isset($filters['tipo']) && $filters['tipo']==$t ? 'selected' : '' ?>><?= ucfirst($t) ?></option>
         <?php endforeach; ?>
     </select>
 
@@ -97,27 +87,27 @@
         <div class="card-moto">
             <div class="moto-img">
                 <?php 
-                    $nombreBase = $moto["matricula"] . "-" . $moto["anio"];
-                    $extensiones = ["png","jpg","jpeg","webp","gif"];
-                    $rutaWeb = "assets/img/motos/z1000sx.png"; // fallback
-                    foreach($extensiones as $ext){
-                        $rutaServidor = "assets/img/motos/$nombreBase.$ext";
-                        if(file_exists($rutaServidor)){
-                            $rutaWeb = $rutaServidor;
+                    $imgBase = $moto["matricula"]."-".$moto["anio"];
+                    $exts = ["png","jpg","jpeg","webp","gif"];
+                    $imgPath = "assets/img/motos/default.png";
+                    foreach($exts as $ext){
+                        $file = "assets/img/motos/$imgBase.$ext";
+                        if(file_exists($file)){
+                            $imgPath = $file;
                             break;
                         }
                     }
                 ?>
-                <img src="<?= $rutaWeb ?>" alt="<?= $moto["marca"] . ' ' . $moto["modelo"] ?>">
+                <img src="<?= $imgPath ?>" alt="<?= htmlspecialchars($moto["marca"].' '.$moto["modelo"]) ?>">
             </div>
             <div class="moto-info">
-                <h2><?= $moto["marca"] ?></h2>
-                <p class="modelo"><?= $moto["modelo"] ?></p>
-                <p class="anio"><?= $moto["anio"] ?></p>
+                <h2><?= htmlspecialchars($moto["marca"]) ?></h2>
+                <p class="modelo"><?= htmlspecialchars($moto["modelo"]) ?></p>
+                <p class="anio"><?= htmlspecialchars($moto["anio"]) ?></p>
             </div>
             <div class="moto-footer">
-                <span class="precio"><?= number_format($moto["precio"],0,",","."); ?> €</span>
-                <a href="<?= BASE_URL ?>/moto?id=<?= $moto["id_moto"]; ?>" class="btn-ver">Ver detalles</a>
+                <span class="precio"><?= number_format($moto["precio"],0,",",".") ?> €</span>
+                <a href="<?= BASE_URL ?>/moto?id=<?= $moto["id_moto"] ?>" class="btn-ver">Ver detalles</a>
             </div>
         </div>
     <?php endforeach; ?>
@@ -129,31 +119,17 @@
 <!-- Paginación -->
 <?php if($totalPages>1): ?>
 <div class="paginacion">
-    <!-- Botón anterior -->
-    <?php if($currentPage > 1): ?>
-        <?php 
-            $queryParams['page'] = $currentPage - 1;
-            $prevUrl = BASE_URL . '/motos?' . http_build_query($queryParams);
-        ?>
-        <a href="<?= $prevUrl ?>" class="prev">&laquo; Anterior</a>
+    <?php if($currentPage>1): ?>
+        <?php $queryParams['page']=$currentPage-1; ?>
+        <a href="<?= BASE_URL.'/motos?'.http_build_query($queryParams) ?>" class="prev">&laquo; Anterior</a>
     <?php endif; ?>
-
-    <!-- Números de páginas -->
     <?php for($i=1;$i<=$totalPages;$i++): ?>
-        <?php 
-            $queryParams['page'] = $i;
-            $url = BASE_URL . '/motos?' . http_build_query($queryParams);
-        ?>
-        <a href="<?= $url ?>" class="<?= $i==$currentPage ? 'active' : '' ?>"><?= $i ?></a>
+        <?php $queryParams['page']=$i; ?>
+        <a href="<?= BASE_URL.'/motos?'.http_build_query($queryParams) ?>" class="<?= $i==$currentPage?'active':'' ?>"><?= $i ?></a>
     <?php endfor; ?>
-
-    <!-- Botón siguiente -->
-    <?php if($currentPage < $totalPages): ?>
-        <?php 
-            $queryParams['page'] = $currentPage + 1;
-            $nextUrl = BASE_URL . '/motos?' . http_build_query($queryParams);
-        ?>
-        <a href="<?= $nextUrl ?>" class="next">Siguiente &raquo;</a>
+    <?php if($currentPage<$totalPages): ?>
+        <?php $queryParams['page']=$currentPage+1; ?>
+        <a href="<?= BASE_URL.'/motos?'.http_build_query($queryParams) ?>" class="next">Siguiente &raquo;</a>
     <?php endif; ?>
 </div>
 <?php endif; ?>
@@ -163,38 +139,31 @@
 const marcasModelos = <?= $marcas_modelo_json ?>;
 const marcaSelect = document.getElementById('marca-select');
 const modeloSelect = document.getElementById('modelo-select');
-const modeloId = "<?= $filters['id_modelo'] ?>";
+const selectedModelo = "<?= $filters['id_modelo'] ?? '' ?>";
 
 function llenarModelos(idMarca){
     modeloSelect.innerHTML = '<option value="">Todos los modelos</option>';
     if(idMarca && marcasModelos[idMarca]?.modelos){
         marcasModelos[idMarca].modelos.forEach(m=>{
-            const option = document.createElement('option');
-            option.value = m.id_modelo;
-            option.textContent = m.nombre;
-            if(m.id_modelo==modeloId) option.selected = true;
-            modeloSelect.appendChild(option);
+            const opt = document.createElement('option');
+            opt.value = m.id_modelo;
+            opt.textContent = m.nombre;
+            if(m.id_modelo==selectedModelo) opt.selected=true;
+            modeloSelect.appendChild(opt);
         });
     }
 }
 
-marcaSelect.addEventListener('change', e=>{
-    llenarModelos(e.target.value);
-});
-
+marcaSelect.addEventListener('change', e => llenarModelos(e.target.value));
 if(marcaSelect.value) llenarModelos(marcaSelect.value);
 
-// Función común para sliders
 function initSlider(sliderId, displayId, sufijo){
     const slider = document.getElementById(sliderId);
     const display = document.getElementById(displayId);
     display.textContent = Number(slider.value).toLocaleString('es-ES') + ' ' + sufijo;
-    slider.addEventListener('input', ()=>{
-        display.textContent = Number(slider.value).toLocaleString('es-ES') + ' ' + sufijo;
-    });
+    slider.addEventListener('input', ()=> display.textContent = Number(slider.value).toLocaleString('es-ES') + ' ' + sufijo);
 }
 
-// Inicializar sliders
 initSlider('km_range','km_display','km');
 initSlider('anio','anio_display','');
 initSlider('precio_range','precio_display','€');
