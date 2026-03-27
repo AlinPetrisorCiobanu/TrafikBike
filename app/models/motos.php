@@ -179,4 +179,98 @@ class Moto {
             return null;
         }
     }
+
+    // Función para buscar motos por matrícula, VIN, marca y modelo
+public function searchMotos(array $filters = [], $limit = 10, $offset = 0) {
+    try {
+        $params = [];
+        $sql = "SELECT 
+                    motos.id_moto, motos.matricula, motos.vin, motos.color,
+                    motos.anio, motos.km, motos.garantia_meses,
+                    motos.precio, motos.tipo, motos.permiso,
+                    motos.cilindrada,
+                    estado_motos.nombre AS estado,
+                    modelo.nombre AS modelo,
+                    marcas.nombre AS marca
+                FROM motos
+                INNER JOIN modelo USING(id_modelo)
+                INNER JOIN marcas USING(id_marca)
+                INNER JOIN estado_motos USING(id_estado)
+                WHERE 1=1"; // siempre verdadero para concatenar filtros
+
+        // Filtros individuales
+        if(!empty($filters['matricula'])){
+            $sql .= " AND motos.matricula LIKE :matricula";
+            $params[':matricula'] = "%".$filters['matricula']."%";
+        }
+        if(!empty($filters['vin'])){
+            $sql .= " AND motos.vin LIKE :vin";
+            $params[':vin'] = "%".$filters['vin']."%";
+        }
+        if(!empty($filters['id_marca'])){
+            $sql .= " AND marcas.id_marca = :id_marca";
+            $params[':id_marca'] = $filters['id_marca'];
+        }
+        if(!empty($filters['id_modelo'])){
+            $sql .= " AND modelo.id_modelo = :id_modelo";
+            $params[':id_modelo'] = $filters['id_modelo'];
+        }
+
+        // Orden y paginación
+        $sql .= " ORDER BY motos.id_moto DESC LIMIT :limit OFFSET :offset";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        // Bind de parámetros
+        foreach($params as $key => $val){
+            $stmt->bindValue($key, $val, PDO::PARAM_STR);
+        }
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    } catch(PDOException $e){
+        return [];
+    }
+}
+
+// Contar resultados de la búsqueda
+public function countSearchMotos(array $filters = []) {
+    try {
+        $params = [];
+        $sql = "SELECT COUNT(*) AS total
+                FROM motos
+                INNER JOIN modelo USING(id_modelo)
+                INNER JOIN marcas USING(id_marca)
+                INNER JOIN estado_motos USING(id_estado)
+                WHERE 1=1";
+
+        if(!empty($filters['matricula'])){
+            $sql .= " AND motos.matricula LIKE :matricula";
+            $params[':matricula'] = "%".$filters['matricula']."%";
+        }
+        if(!empty($filters['vin'])){
+            $sql .= " AND motos.vin LIKE :vin";
+            $params[':vin'] = "%".$filters['vin']."%";
+        }
+        if(!empty($filters['id_marca'])){
+            $sql .= " AND marcas.id_marca = :id_marca";
+            $params[':id_marca'] = $filters['id_marca'];
+        }
+        if(!empty($filters['id_modelo'])){
+            $sql .= " AND modelo.id_modelo = :id_modelo";
+            $params[':id_modelo'] = $filters['id_modelo'];
+        }
+
+        $stmt = $this->pdo->prepare($sql);
+        foreach($params as $key=>$val){ $stmt->bindValue($key,$val,PDO::PARAM_STR); }
+        $stmt->execute();
+        return (int)$stmt->fetch(PDO::FETCH_ASSOC)['total'];
+
+    } catch(PDOException $e){
+        return 0;
+    }
+}
 }

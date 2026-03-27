@@ -13,7 +13,7 @@ class motosController extends Controller {
     public function index()
     {
         $page = max(1, (int)($_GET['page'] ?? 1));
-        $limit = 8;
+        $limit = $_GET['limit'] ?? 8;
         $offset = ($page-1) * $limit;
 
         //-- Recibir filtros

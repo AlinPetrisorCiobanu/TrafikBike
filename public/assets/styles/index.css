@@ -28,6 +28,8 @@ color: aliceblue;
 }
 
 .hero .btn{
+width: 200px;
+border-radius: 10px;
 padding:12px 25px;
 margin:5px;
 border:none;

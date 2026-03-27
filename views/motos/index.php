@@ -59,6 +59,15 @@
                 <span id="cilindrada_display" class="slider-value"><?= number_format($filters['cilindrada_range'] ?: 3000,0,",",".") ?> cc</span>
             </div>
         </div>
+        <!-- limite por pagina -->
+        <div class="slider-container">
+            <label for="pag_limikt">Mostrar por pagina:</label>
+            <div class="slider-row">
+                <input type="range" id="pag_limikt" name="page_limit" min="0" max="100" step="20"
+                    value="8">
+                <span id="limit_page" class="slider-value"> 100 </span>
+            </div>
+        </div>
 
     </div> <!-- fin sliders-row -->
 
