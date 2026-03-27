@@ -40,11 +40,13 @@ class Moto {
             $params[':search'] = "%{$filters['search']}%";
         }
 
-        // Marca y modelo
+        // Marca (CORREGIDO: usamos modelo.id_marca)
         if(!empty($filters['id_marca'])){
-            $where .= " AND motos.id_marca = :id_marca";
+            $where .= " AND modelo.id_marca = :id_marca";
             $params[':id_marca'] = $filters['id_marca'];
         }
+
+        // Modelo
         if(!empty($filters['id_modelo'])){
             $where .= " AND motos.id_modelo = :id_modelo";
             $params[':id_modelo'] = $filters['id_modelo'];
@@ -90,14 +92,9 @@ class Moto {
     }
 
     //-- Obtener motos con filtros y paginación
-    public function getMotosPaginated($limit = 10, $offset = 0, ...$filters)
+    public function getMotosPaginated($limit = 10, $offset = 0, array $filters = [])
     {
         try {
-            $filters = array_combine(
-                ['search','id_marca','id_modelo','km_range','anio','precio_range','permiso','cilindrada_range','tipo'],
-                $filters
-            );
-
             $params = [];
             $sql = "SELECT 
                         motos.id_moto, motos.matricula, motos.color,
@@ -133,13 +130,9 @@ class Moto {
     }
 
     //-- Contar motos para paginación
-    public function countMotos(...$filters){
+    public function countMotos(array $filters = [])
+    {
         try{
-            $filters = array_combine(
-                ['search','id_marca','id_modelo','km_range','anio','precio_range','permiso','cilindrada_range','tipo'],
-                $filters
-            );
-
             $params = [];
             $sql = "SELECT COUNT(*) as total FROM motos
                     INNER JOIN modelo USING(id_modelo)
@@ -159,7 +152,7 @@ class Moto {
         }
     }
 
-    //-- Obtener una moto por id (funciona bien, lo dejamos igual)
+    //-- Obtener una moto por id
     public function getMotoById($id) {
         try {
             $stmt = $this->pdo->prepare("

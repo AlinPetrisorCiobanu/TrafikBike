@@ -13,7 +13,7 @@ class motosController extends Controller {
     public function index()
     {
         $page = max(1, (int)($_GET['page'] ?? 1));
-        $limit = 10;
+        $limit = 8;
         $offset = ($page-1) * $limit;
 
         //-- Recibir filtros
@@ -30,8 +30,8 @@ class motosController extends Controller {
         ];
 
         //-- Traer motos
-        $motos = $this->motoModel->getMotosPaginated($limit, $offset, ...array_values($filters));
-        $totalMotos = $this->motoModel->countMotos(...array_values($filters));
+        $motos = $this->motoModel->getMotosPaginated($limit, $offset, $filters);
+        $totalMotos = $this->motoModel->countMotos($filters);
         $totalPages = ceil($totalMotos / $limit);
 
         //-- Marcas y modelos
@@ -71,13 +71,13 @@ class motosController extends Controller {
     }
 
     public function ver_moto()
-{
-    $id_moto = $_GET['id'] ?? null;
-    $moto = $id_moto ? $this->motoModel->getMotoById($id_moto) : null;
-    return $this->view("motos/moto/index", [
-        "styles" => ["moto.css"],
-        "motos" => $moto ?? [],
-        "error" => $moto ? null : "No se pudo cargar la moto"
-    ]);
-}
+    {
+        $id_moto = $_GET['id'] ?? null;
+        $moto = $id_moto ? $this->motoModel->getMotoById($id_moto) : null;
+        return $this->view("motos/moto/index", [
+            "styles" => ["moto.css"],
+            "motos" => $moto ?? [],
+            "error" => $moto ? null : "No se pudo cargar la moto"
+        ]);
+    }
 }

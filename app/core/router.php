@@ -16,72 +16,53 @@ class Router {
 
     public function dispatch()
     {
-
-        $method = $_SERVER['REQUEST_METHOD'];
+        $httpMethod = $_SERVER['REQUEST_METHOD'];
 
         $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        $base = BASE_URL;
-
-        $url = str_replace($base, "", $url);
-
+        $url = str_replace(BASE_URL, "", $url);
         $url = rtrim($url, "/");
 
-        if($url === ""){
+        if ($url === "") {
             $url = "/";
         }
 
-        if(isset($this->routes[$method][$url]))
-        {
-
-            $action = $this->routes[$method][$url];
-
-            list($controllerPath, $method) = explode('@', $action);
-
-            // Convertir namespace tipo ControlPanel/DashboardController
-            $controllerPath = str_replace('\\', '/', $controllerPath);
-
-            // Separar carpeta(s) y clase
-            $parts = explode('/', $controllerPath);
-            $controllerName = array_pop($parts);
-            $directory = implode('/', $parts);  
-
-            // Construir ruta del archivo
-            $filePath = ROOT_PATH . "/app/controllers/";
-
-            if (!empty($directory)) {
-                $filePath .= strtolower($directory) . "/";
-            }
-
-            $filePath .= $controllerName . ".php";
-
-            if (!file_exists($filePath)) {
-                echo "Controlador no encontrado";
-                return;
-            }
-
-            require_once $filePath;
-
-            // Instanciar controlador
-            $controller = new $controllerName();
-
-            if (!method_exists($controller, $method)) {
-                echo "Método no encontrado";
-                return;
-            }
-
-            $controller->$method();
-
-            $controller->$method();
-
-        }
-        else
-        {
-
-            echo "404 - pagina no encontrada";
-
+        if (!isset($this->routes[$httpMethod][$url])) {
+            http_response_code(404);
+            echo "404 - Página no encontrada";
+            return;
         }
 
+        $action = $this->routes[$httpMethod][$url];
+        list($controllerPath, $method) = explode('@', $action);
+
+        $controllerPath = str_replace('\\', '/', $controllerPath);
+
+        $parts = explode('/', $controllerPath);
+        $controllerName = array_pop($parts);
+        $directory = implode('/', $parts);
+
+        $filePath = ROOT_PATH . "/app/controllers/";
+        if (!empty($directory)) {
+            $filePath .= strtolower($directory) . "/";
+        }
+        $filePath .= $controllerName . ".php";
+
+        if (!file_exists($filePath)) {
+            http_response_code(500);
+            echo "Controlador no encontrado";
+            return;
+        }
+
+        require_once $filePath;
+
+        $controller = new $controllerName();
+
+        if (!method_exists($controller, $method)) {
+            http_response_code(500);
+            echo "Método no encontrado";
+            return;
+        }
+
+        $controller->$method();
     }
-
 }

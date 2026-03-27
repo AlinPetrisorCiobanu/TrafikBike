@@ -3,7 +3,8 @@
 ========================= */
 
 .motos-table {
-    width: 100%;
+    width: calc(100% - 270px);
+    margin-left: 260px;
     border-collapse: collapse;
     background: #fff;
     border-radius: 8px;

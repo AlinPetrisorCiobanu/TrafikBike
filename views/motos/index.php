@@ -120,13 +120,32 @@
 <!-- Paginación -->
 <?php if($totalPages>1): ?>
 <div class="paginacion">
+    <!-- Botón anterior -->
+    <?php if($currentPage > 1): ?>
+        <?php 
+            $queryParams['page'] = $currentPage - 1;
+            $prevUrl = BASE_URL . '/motos?' . http_build_query($queryParams);
+        ?>
+        <a href="<?= $prevUrl ?>" class="prev">&laquo; Anterior</a>
+    <?php endif; ?>
+
+    <!-- Números de páginas -->
     <?php for($i=1;$i<=$totalPages;$i++): ?>
         <?php 
             $queryParams['page'] = $i;
             $url = BASE_URL . '/motos?' . http_build_query($queryParams);
         ?>
-        <a href="<?= $url ?>" class="<?= $i==$currentPage?'active':'' ?>"><?= $i ?></a>
+        <a href="<?= $url ?>" class="<?= $i==$currentPage ? 'active' : '' ?>"><?= $i ?></a>
     <?php endfor; ?>
+
+    <!-- Botón siguiente -->
+    <?php if($currentPage < $totalPages): ?>
+        <?php 
+            $queryParams['page'] = $currentPage + 1;
+            $nextUrl = BASE_URL . '/motos?' . http_build_query($queryParams);
+        ?>
+        <a href="<?= $nextUrl ?>" class="next">Siguiente &raquo;</a>
+    <?php endif; ?>
 </div>
 <?php endif; ?>
 

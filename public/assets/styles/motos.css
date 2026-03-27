@@ -141,6 +141,49 @@
     background: #555;
     cursor: default;
 }
+.paginacion {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px 0;
+    gap: 5px;
+    font-family: Arial, sans-serif;
+}
+
+.paginacion a {
+    display: block;
+    padding: 8px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    color:#ddd;
+    transition: all 0.2s;
+    background-color: #111;
+}
+
+.paginacion a:hover {
+    background-color: #f0f0f0;
+    color:#111;
+}
+
+.paginacion a.active {
+    background-color: #007BFF;
+    color: white;
+    border-color: #007BFF;
+}
+
+.paginacion a.prev,
+.paginacion a.next {
+    font-weight: bold;
+    background-color: #eee;
+    color:#111;
+}
+
+.paginacion a.prev:hover,
+.paginacion a.next:hover {
+    background-color: #ddd;
+    color:#111;
+}
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
