@@ -10,7 +10,7 @@
             </div>
             <div class="perfil-info">
                 <h1><?= $usuario['nombre'] . ' ' . ($usuario['apellidos'] ?? '') ?></h1>
-                <p class="perfil-rol"><?= $usuario['rol'] ?></p>
+                <p class="perfil-rol"><?= $usuario['rol'] ?> - 245 000 000<?= $usuario['id_user'] ?> </p>
                 <span class="estado <?= $usuario['is_active'] ? 'activo' : 'inactivo' ?>">
                     <?= $usuario['is_active'] ? 'Activo' : 'Inactivo' ?>
                 </span>
@@ -23,7 +23,7 @@
             <!-- DATOS PERSONALES -->
             <div class="card">
                 <h2>Datos personales</h2>
-                <p><strong>ID:</strong> <?= $usuario['id_user'] ?></p>
+                
                 <p><strong>Usuario:</strong> <?= $usuario['usuario'] ?></p>
                 <p><strong>Email:</strong> <?= $usuario['email'] ?></p>
                 <p><strong>DNI:</strong> <?= $usuario['dni'] ?></p>
@@ -32,11 +32,23 @@
 
             <!-- INFO GENERAL -->
             <div class="card">
-                <h2>Información general</h2>
-                <p><strong>Rol:</strong> <?= $usuario['rol'] ?></p>
+                <h2>Información General</h2>
                 <p><strong>Estado:</strong> <?= $usuario['is_active'] ? 'Activo' : 'Inactivo' ?></p>
+                <p><strong>Motero:</strong> <?= $usuario['is_biker'] ? 'SI' : 'NO' ?></p>
+                <p><strong>Permiso:</strong> <?php echo $usuario['permiso'] ?></p>
+                <p><strong>Confirmación:</strong> <?= $usuario['confirmed'] ? 'Cuenta Confirmada' : 'Cuenta No Confirmada' ?></p>
             </div>
-
+            
+            <!-- INFO ADICIONAL -->
+             <?php if($usuario['is_biker'] && $usuario['permiso'] && $usuario['confirmed']) {?>
+                <div class="card">
+                    <h2>Información Adicional</h2>
+                    <p><strong>Estado:</strong> <?= $usuario['is_active'] ? 'Activo' : 'Inactivo' ?></p>
+                    <p><strong>Motero:</strong> <?= $usuario['is_biker'] ? 'SI' : 'NO' ?></p>
+                    <p><strong>Permiso:</strong> <?php echo $usuario['permiso'] ?></p>
+                    <p><strong>Confirmación:</strong> <?= $usuario['confirmed'] ? 'Cuenta Confirmada' : 'Cuenta No Confirmada' ?></p>
+                </div>
+            <?php } ?>
             <!-- VENDEDOR -->
             <?php if (!empty($usuario['sueldo_vendedor'])): ?>
             <div class="card">

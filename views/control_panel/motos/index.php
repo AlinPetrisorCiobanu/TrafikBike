@@ -2,7 +2,7 @@
     <h1 class="h_controlPanel">Control Panel - Motos</h1>
 
     <!-- BUSCADOR -->
-    <form method="GET" action="<?= BASE_URL ?>/control/panel/motos" class="form-buscador">
+    <form method="GET" action="<?= BASE_URL ?>/control/panel/motos" class="form-buscador" id="form-buscador-control-panel">
         <input type="text" name="matricula" placeholder="Buscar por matrícula" 
                value="<?= htmlspecialchars($filters['matricula'] ?? '') ?>">
         <input type="text" name="vin" placeholder="Buscar por VIN" 

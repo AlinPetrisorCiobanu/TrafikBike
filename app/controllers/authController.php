@@ -51,6 +51,9 @@ class AuthController extends Controller {
         $_SESSION['email']     = $user["email"];
         $_SESSION['usuario']   = $user["usuario"];
         $_SESSION['is_active'] = $user["is_active"];
+        $_SESSION['is_biker'] = $user["is_biker"];
+        $_SESSION['permiso'] = $user["permiso"];
+        $_SESSION['confirmed'] = $user["confirmed"];
         $_SESSION['token']     = $token;
 
         // Redirigir al home

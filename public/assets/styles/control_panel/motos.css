@@ -1,4 +1,18 @@
 /* =========================
+   BUSCADOR
+========================= */
+
+
+#form-buscador-control-panel{
+    margin: 0;
+    width: calc(100% - 270px);
+    margin-left: 260px;
+    background: #111827;
+    color: #fff;
+    border-radius: 0px 0px 0px 0px;
+}
+
+/* =========================
    TABLA
 ========================= */
 
