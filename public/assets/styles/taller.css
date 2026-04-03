@@ -1,0 +1,111 @@
+/* Contenedor principal */
+.usuario-citas {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #111827;
+}
+
+/* Botón de añadir cita */
+.add-cita {
+    text-align: right;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    display: inline-block;
+    padding: 10px 18px;
+    background-color: #10b981;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-add:hover {
+    background-color: #059669;
+}
+
+/* Contenedor de tarjetas */
+.citas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de cita */
+.cita-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.cita-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Header de la cita */
+.cita-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cita-header h3 {
+    font-size: 18px;
+    color: #111827;
+    margin: 0;
+}
+
+.estado {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Estados */
+.estado-pendiente { background: #fbbf24; color: #111827; }
+.estado-confirmada { background: #3b82f6; }
+.estado-en-proceso { background: #6366f1; }
+.estado-completada { background: #10b981; }
+.estado-cancelada { background: #ef4444; }
+.estado-retrasada { background: #f97316; }
+.estado-esperando-piezas { background: #f59e0b; }
+
+/* Body de la tarjeta */
+.cita-body p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.servicios ul {
+    padding-left: 18px;
+    margin: 4px 0;
+}
+
+.servicios li {
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.observaciones {
+    font-style: italic;
+    color: #6b7280;
+}
+
+/* No hay citas */
+.no-citas {
+    text-align: center;
+    font-size: 16px;
+    color: #6b7280;
+    margin-top: 40px;
+}

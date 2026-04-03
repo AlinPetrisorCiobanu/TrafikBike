@@ -22,6 +22,7 @@ $router->get('/moto', 'motosController@ver_moto');
 
 $router->get('/tienda', 'tiendaController@index');
 $router->get('/taller', 'tallerController@index');
+$router->get('/taller/cita', 'tallerController@index_cita');
 $router->get('/contacto', 'contactoController@index');
 $router->get('/usuario', 'usuarioController@index');
 

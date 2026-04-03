@@ -1,3 +1,6 @@
+main{
+    min-height: 80dvh;
+}
 .tienda-table {
     width: calc(100% - 270px);
     margin-left: 260px;

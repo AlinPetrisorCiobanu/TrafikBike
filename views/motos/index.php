@@ -1,7 +1,7 @@
 <h1 class="h_motos">Motos en Venta</h1>
 
 <form method="GET" action="<?= BASE_URL ?>/motos" class="form-buscador">
-
+    
     <!-- Marca -->
     <select id="marca-select" name="marca">
         <option value="">Todas las marcas</option>
@@ -18,13 +18,28 @@
     </select>
 
     <div class="sliders-row">
+        <!-- Resultados por página -->
+        <div class="slider-container">
+            <label for="limit">Resultados por página:</label>
+            <div class="slider-row">
+                <?php $limit = isset($filters['limit']) && $filters['limit']!=='' ? $filters['limit'] : 8; ?>
+                <select id="limit" name="limit">
+                    <?php foreach([5,8,10,15,20,50] as $l): ?>
+                        <option value="<?= $l ?>" <?= $l == $limit ? 'selected' : '' ?>><?= $l ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="sliders-row">
 
         <!-- Kilometraje -->
         <div class="slider-container">
             <label for="km_range">Kilometraje máximo:</label>
             <div class="slider-row">
                 <?php $km = isset($filters['km_range']) && $filters['km_range']!=='' ? $filters['km_range'] : 200000; ?>
-                <input type="range" id="km_range" name="km_range" min="0" max="200000" step="1000" value="<?= $km ?>">
+                <input type="range" id="km_range" name="km_range" min="0" max="60000" step="1000" value="<?= $km ?>">
                 <span id="km_display" class="slider-value"><?= number_format($km,0,",",".") ?> km</span>
             </div>
         </div>
@@ -34,7 +49,7 @@
             <label for="anio">Año mínimo:</label>
             <div class="slider-row">
                 <?php $anio = isset($filters['anio']) && $filters['anio']!=='' ? $filters['anio'] : 1990; ?>
-                <input type="range" id="anio" name="anio" min="1990" max="<?= date('Y') ?>" step="1" value="<?= $anio ?>">
+                <input type="range" id="anio" name="anio" min="2015" max="<?= date('Y') ?>" step="1" value="<?= $anio ?>">
                 <span id="anio_display" class="slider-value"><?= $anio ?></span>
             </div>
         </div>

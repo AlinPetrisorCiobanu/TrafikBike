@@ -21,8 +21,8 @@ RUN sed -i 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available
 COPY docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
-# Exponer puerto 80
-EXPOSE 80
+# Exponer puerto 8080
+EXPOSE 8080
 
 # Usar entrypoint personalizado
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]

@@ -1,0 +1,100 @@
+main{
+    min-height: 80dvh;
+}
+.citas-table {
+    width: calc(100% - 270px);
+    margin-left: 260px; /* margen por menú */
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    color: #111827;
+}
+
+.citas-table thead {
+    background: #111827;
+    color: #fff;
+}
+
+.citas-table th,
+.citas-table td {
+    padding: 12px 15px;
+    text-align: left;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+.citas-table tbody tr {
+    border-bottom: 1px solid #eee;
+    transition: 0.2s;
+}
+
+.citas-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+/* Usuario y Mecánico */
+.user-col strong,
+.mec-col strong {
+    font-size: 14px;
+    color: #111827;
+}
+
+.user-col span,
+.mec-col span {
+    font-size: 12px;
+    color: #4b5563;
+}
+
+/* Moto */
+.moto-col {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.moto-col div {
+    margin-bottom: 3px;
+}
+
+/* Servicios */
+.serv-col ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.serv-col li {
+    font-size: 12px;
+    margin-bottom: 2px;
+}
+
+/* Estado */
+.estado-tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px 6px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.estado-pendiente { background: #fbbf24; color: #111827; }
+.estado-confirmada { background: #3b82f6; }
+.estado-en-proceso { background: #6366f1; }
+.estado-completada { background: #10b981; }
+.estado-cancelada { background: #ef4444; }
+.estado-retrasada { background: #f97316; }
+.estado-esperando-piezas { background: #f59e0b; }
+
+/* Observaciones */
+.obs-col {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+/* Empty state */
+.citas-table td[colspan] {
+    text-align: center;
+    padding: 20px;
+    color: #6b7280;
+}

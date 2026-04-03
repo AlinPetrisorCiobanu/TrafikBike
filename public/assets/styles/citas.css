@@ -1,0 +1,178 @@
+/* Contenedor principal */
+.usuario-citas {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: 'Segoe UI', sans-serif;
+    color: #111827;
+}
+
+/* Formulario de agregar cita */
+.add-cita-form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    margin-bottom: 30px;
+    transition: 0.2s;
+}
+
+.add-cita-form:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+.add-cita-form h2 {
+    margin-top: 0;
+    color: #111827;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.add-cita-form .form-group {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-cita-form label {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.add-cita-form input,
+.add-cita-form select,
+.add-cita-form textarea {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.add-cita-form input:focus,
+.add-cita-form select:focus,
+.add-cita-form textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+.add-cita-form textarea {
+    resize: vertical;
+    min-height: 60px;
+}
+
+/* Checkbox servicios */
+.servicios-checkboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    font-size: 13px;
+    gap: 4px;
+}
+
+/* Botón agregar cita */
+.add-cita-form button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    background-color: #10b981;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.add-cita-form button:hover {
+    background-color: #059669;
+}
+
+/* Contenedor de tarjetas */
+.citas-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+}
+
+/* Tarjeta de cita */
+.cita-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+    padding: 20px;
+    transition: 0.2s;
+}
+
+.cita-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+}
+
+/* Header de la cita */
+.cita-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.cita-header h3 {
+    font-size: 18px;
+    color: #111827;
+    margin: 0;
+}
+
+.estado {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Estados */
+.estado-pendiente { background: #fbbf24; color: #111827; }
+.estado-confirmada { background: #3b82f6; }
+.estado-en-proceso { background: #6366f1; }
+.estado-completada { background: #10b981; }
+.estado-cancelada { background: #ef4444; }
+.estado-retrasada { background: #f97316; }
+.estado-esperando-piezas { background: #f59e0b; }
+
+/* Body de la tarjeta */
+.cita-body p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+.servicios ul {
+    padding-left: 18px;
+    margin: 4px 0;
+}
+
+.servicios li {
+    font-size: 13px;
+    margin-bottom: 2px;
+}
+
+.observaciones {
+    font-style: italic;
+    color: #6b7280;
+}
+
+/* No hay citas */
+.no-citas {
+    text-align: center;
+    font-size: 16px;
+    color: #6b7280;
+    margin-top: 40px;
+}
