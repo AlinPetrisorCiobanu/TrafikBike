@@ -21,10 +21,21 @@ $router->get('/motos', 'motosController@index');
 $router->get('/moto', 'motosController@ver_moto');
 
 $router->get('/tienda', 'tiendaController@index');
+
+// Taller y Citas
 $router->get('/taller', 'tallerController@index');
-$router->get('/taller/cita', 'tallerController@index_cita');
+$router->get('/taller/nuevaCita', 'tallerController@nuevaCita');
+$router->post('/taller/crearCita', 'tallerController@crearCita');
+
 $router->get('/contacto', 'contactoController@index');
+
+// Perfil usuario
 $router->get('/usuario', 'usuarioController@index');
+
+// Editar usuario (GET y POST en la misma ruta)
+$router->get('/usuario/update', 'usuarioController@update');
+$router->post('/usuario/update', 'usuarioController@update');
+
 
 /*
 |----------------------------

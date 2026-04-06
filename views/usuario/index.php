@@ -71,9 +71,9 @@
 
         </div>
 
-        <!-- ACCIONES -->
+       <!-- ACCIONES -->
         <div class="perfil-actions">
-            <a href="#" class="btn">Editar perfil</a>
+            <a href="<?= BASE_URL ?>/usuario/update?id_user=<?= $usuario['id_user'] ?>" class="btn">Editar perfil</a>
             <a href="<?= BASE_URL ?>/logout" class="btn logout">Cerrar sesión</a>
         </div>
 

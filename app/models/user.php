@@ -109,4 +109,66 @@ class User {
     $stmt->execute(['id_user' => $id_user]);
     return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function updateUser($id_user, $data) {
+    // Campos de la tabla users
+    $fieldsUser = [];
+    $paramsUser = ['id_user' => $id_user];
+
+    $mapUser = ['nombre','apellidos','dni','telefono','email','usuario','id_role'];
+    foreach ($mapUser as $field) {
+        if (isset($data[$field])) {
+            $fieldsUser[] = "$field=:$field";
+            $paramsUser[$field] = $data[$field];
+        }
+    }
+
+    // Contraseña
+    if (!empty($data['password'])) {
+        $fieldsUser[] = "password_hash=:password_hash";
+        $paramsUser['password_hash'] = password_hash($data['password'], PASSWORD_DEFAULT);
+    }
+
+    // Ejecutar actualización de users
+    if (count($fieldsUser) > 0) {
+        $sqlUser = "UPDATE users SET " . implode(', ', $fieldsUser) . " WHERE id_user=:id_user";
+        $stmt = $this->pdo->prepare($sqlUser);
+        $stmt->execute($paramsUser);
+    }
+
+    // Campos de vendedor
+    if (isset($data['comision']) || isset($data['sueldo_vendedor']) || isset($data['fecha_contrato_vendedor'])) {
+        $fieldsVend = [];
+        $paramsVend = ['id_user' => $id_user];
+
+        if (isset($data['comision'])) { $fieldsVend[] = "comision=:comision"; $paramsVend['comision'] = $data['comision']; }
+        if (isset($data['sueldo_vendedor'])) { $fieldsVend[] = "sueldo=:sueldo"; $paramsVend['sueldo'] = $data['sueldo_vendedor']; }
+        if (isset($data['fecha_contrato_vendedor'])) { $fieldsVend[] = "fecha_contrato=:fecha_contrato"; $paramsVend['fecha_contrato'] = $data['fecha_contrato_vendedor']; }
+
+        if (count($fieldsVend) > 0) {
+            $sqlVend = "UPDATE vendedor SET " . implode(', ', $fieldsVend) . " WHERE id_user=:id_user";
+            $stmt = $this->pdo->prepare($sqlVend);
+            $stmt->execute($paramsVend);
+        }
+    }
+
+    // Campos de mecanico
+    if (isset($data['cargo']) || isset($data['sueldo_mecanico']) || isset($data['fecha_contrato_mecanico'])) {
+        $fieldsMec = [];
+        $paramsMec = ['id_user' => $id_user];
+
+        if (isset($data['cargo'])) { $fieldsMec[] = "cargo=:cargo"; $paramsMec['cargo'] = $data['cargo']; }
+        if (isset($data['sueldo_mecanico'])) { $fieldsMec[] = "sueldo=:sueldo"; $paramsMec['sueldo'] = $data['sueldo_mecanico']; }
+        if (isset($data['fecha_contrato_mecanico'])) { $fieldsMec[] = "fecha_contrato=:fecha_contrato"; $paramsMec['fecha_contrato'] = $data['fecha_contrato_mecanico']; }
+
+        if (count($fieldsMec) > 0) {
+            $sqlMec = "UPDATE mecanico SET " . implode(', ', $fieldsMec) . " WHERE id_user=:id_user";
+            $stmt = $this->pdo->prepare($sqlMec);
+            $stmt->execute($paramsMec);
+        }
+    }
+
+    // Devolver el usuario actualizado
+    return $this->getUserById($id_user);
+}
 }

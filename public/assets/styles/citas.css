@@ -1,16 +1,16 @@
-/* Contenedor principal */
 .usuario-citas {
-    max-width: 1100px;
+    max-width: 900px;
     margin: 20px auto;
-    padding: 0 20px;
+    padding: 0 15px;
     font-family: 'Segoe UI', sans-serif;
     color: #111827;
+    min-height: 80dvh;
+    margin-top: 80px;
 }
 
-/* Formulario de agregar cita */
 .add-cita-form {
     background: #fff;
-    padding: 20px;
+    padding: 18px;
     border-radius: 8px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.06);
     margin-bottom: 30px;
@@ -29,21 +29,20 @@
     margin-bottom: 15px;
 }
 
-.add-cita-form .form-group {
-    margin-bottom: 12px;
+.form-group {
+    margin-bottom: 14px;
     display: flex;
     flex-direction: column;
 }
 
-.add-cita-form label {
+.form-group label {
     font-weight: 600;
     font-size: 14px;
     margin-bottom: 4px;
 }
 
-.add-cita-form input,
-.add-cita-form select,
-.add-cita-form textarea {
+.form-group input,
+.form-group textarea {
     padding: 8px 10px;
     border-radius: 6px;
     border: 1px solid #d1d5db;
@@ -51,35 +50,21 @@
     transition: 0.2s;
 }
 
-.add-cita-form input:focus,
-.add-cita-form select:focus,
-.add-cita-form textarea:focus {
+.form-group input:focus,
+.form-group textarea:focus {
     outline: none;
     border-color: #3b82f6;
     box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
 }
 
-.add-cita-form textarea {
-    resize: vertical;
-    min-height: 60px;
-}
-
-/* Checkbox servicios */
-.servicios-checkboxes {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.checkbox-label {
-    display: flex;
-    align-items: center;
-    font-size: 13px;
-    gap: 4px;
+textarea {
+    resize: none;
+    min-height: 80px;
+    max-height: 120px;
 }
 
 /* Botón agregar cita */
-.add-cita-form button {
+.btn-add {
     margin-top: 10px;
     padding: 10px 16px;
     border: none;
@@ -91,88 +76,65 @@
     transition: 0.2s;
 }
 
-.add-cita-form button:hover {
+.btn-add:hover {
     background-color: #059669;
 }
 
-/* Contenedor de tarjetas */
-.citas-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 20px;
-}
-
-/* Tarjeta de cita */
-.cita-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
-    padding: 20px;
-    transition: 0.2s;
-}
-
-.cita-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-}
-
-/* Header de la cita */
-.cita-header {
+/* Dual select compact */
+.dual-select {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 12px;
+    gap: 12px;
 }
 
-.cita-header h3 {
-    font-size: 18px;
-    color: #111827;
+.dual-select div {
+    flex: 1;
+    background: #fefefe;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 8px;
+    min-height: 120px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.dual-select h4 {
+    font-size: 13px;
+    margin: 0 0 6px 0;
+    color: #374151;
+    text-align: center;
+}
+
+.dual-select ul {
+    list-style: none;
     margin: 0;
+    padding: 0;
 }
 
-.estado {
-    font-size: 12px;
+.dual-select li {
     padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: 600;
+    border-radius: 6px;
+    margin-bottom: 4px;
+    cursor: pointer;
+    transition: 0.2s;
+    background: #f3f4f6;
+    font-size: 13px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.dual-select li:hover {
+    background: #3b82f6;
     color: #fff;
 }
 
-/* Estados */
-.estado-pendiente { background: #fbbf24; color: #111827; }
-.estado-confirmada { background: #3b82f6; }
-.estado-en-proceso { background: #6366f1; }
-.estado-completada { background: #10b981; }
-.estado-cancelada { background: #ef4444; }
-.estado-retrasada { background: #f97316; }
-.estado-esperando-piezas { background: #f59e0b; }
+/* Responsive */
+@media (max-width: 768px) {
+    .dual-select {
+        flex-direction: column;
+    }
 
-/* Body de la tarjeta */
-.cita-body p {
-    margin: 6px 0;
-    font-size: 14px;
-    color: #4b5563;
-}
-
-.servicios ul {
-    padding-left: 18px;
-    margin: 4px 0;
-}
-
-.servicios li {
-    font-size: 13px;
-    margin-bottom: 2px;
-}
-
-.observaciones {
-    font-style: italic;
-    color: #6b7280;
-}
-
-/* No hay citas */
-.no-citas {
-    text-align: center;
-    font-size: 16px;
-    color: #6b7280;
-    margin-top: 40px;
+    .dual-select div {
+        max-height: 180px;
+    }
 }

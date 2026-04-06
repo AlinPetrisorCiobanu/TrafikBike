@@ -132,3 +132,95 @@
         flex-direction: column;
     }
 }
+
+/* FORMULARIO */
+.perfil-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* INPUTS */
+.card input,
+.card select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #0f172a;
+    color: #fff;
+    border: 1px solid #334155;
+    transition: 0.2s;
+}
+
+.card input:focus,
+.card select:focus {
+    border-color: #ff3c00;
+    box-shadow: 0 0 0 2px rgba(255,60,0,0.3);
+}
+
+/* LABELS */
+.card label {
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* MENSAJES */
+.success {
+    background: #16a34a;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.error {
+    background: #dc2626;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+/* HOVER MÁS SUAVE */
+.card:hover {
+    transform: translateY(-5px) scale(1.01);
+}
+
+/* BOTÓN GUARDAR MÁS PRO */
+button.btn {
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+/* TABS */
+.tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 10px;
+    background: #1e293b;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.tab-btn.active,
+.tab-btn:hover {
+    background: #ff3c00;
+}
+
+/* CONTENIDO */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}

@@ -1,35 +1,65 @@
 <?php
-
 require_once __DIR__ . '/../core/controller.php';
 require_once __DIR__ . '/../models/taller.php';
 
 class TallerController extends Controller {
-
     private $taller;
 
     public function __construct() {
         $this->taller = new Taller;
     }
 
-    public function index()
-    {
-        // 🔒 Ideal: usar sesión
-        $userId = $_SESSION['id'] ?? null;
-
-        // 🔹 Obtener citas
-        $citas = $this->taller->getCitasByUserId($userId);
-
+    // Listado de citas
+    public function index() {
+        $citas = $this->taller->getAllCitas();
         return $this->view("taller/index", [
             "styles" => ["taller.css"],
             "citas" => $citas
         ]);
     }
 
-    public function index_cita()
-    {
-
+    // Formulario de nueva cita
+    public function nuevaCita() {
+        $motos = $this->taller->getMotos();
+        $servicios = $this->taller->getServicios();
         return $this->view("taller/citas/index", [
             "styles" => ["citas.css"],
+            "motos" => $motos,
+            "servicios" => $servicios
         ]);
-    } 
+    }
+
+    // Crear cita desde POST
+    public function crearCita() {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = [
+                'id_mecanico' => $_POST['id_mecanico'] ?? 1, // asignar mecánico por defecto
+                'id_moto' => $_POST['id_moto'],
+                'fecha_cita' => $_POST['fecha_cita'],
+                'observaciones' => $_POST['observaciones'] ?? null,
+                'servicios' => []
+            ];
+
+            // Mapear servicios
+            if (!empty($_POST['servicios'])) {
+                foreach ($_POST['servicios'] as $id_servicio) {
+                    // Aquí podrías obtener el precio desde DB si quieres
+                    $data['servicios'][] = [
+                        'id_servicio' => $id_servicio,
+                        'precio_base' => 50, // valor fijo ejemplo, reemplazar según DB
+                        'descuento' => 0
+                    ];
+                }
+            }
+
+            $result = $this->taller->createCita($data);
+
+            if ($result['success']) {
+                header("Location: " . BASE_URL . "/taller");
+                exit;
+            } else {
+                echo "Error: " . $result['error'];
+            }
+        }
+    }
 }

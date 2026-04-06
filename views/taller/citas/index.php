@@ -1,84 +1,86 @@
 <main class="usuario-citas">
 
-    <h1>Mis Citas</h1>
+    <h1>Agendar nueva cita</h1>
 
-    <!-- Formulario para nueva cita -->
     <div class="add-cita-form">
-        <h2>Agendar nueva cita</h2>
         <form action="<?= BASE_URL ?>/taller/crearCita" method="POST">
+
+            <!-- Fecha de cita -->
             <div class="form-group">
                 <label for="fecha_cita">Fecha y hora:</label>
                 <input type="datetime-local" id="fecha_cita" name="fecha_cita" required>
             </div>
 
+            <!-- Moto -->
             <div class="form-group">
-                <label for="id_moto">Selecciona tu moto:</label>
-                <select id="id_moto" name="id_moto" required>
-                    <option value="">-- Elige moto --</option>
-                    <?php foreach ($motos as $moto): ?>
-                        <option value="<?= $moto['id_moto'] ?>">
-                            <?= htmlspecialchars($moto['marca'] . ' ' . $moto['modelo']) ?> (<?= $moto['matricula'] ?>)
-                        </option>
-                    <?php endforeach; ?>
-                </select>
+                <label for="id_moto">Moto:</label>
+                <input type="text" id="id_moto" name="id_moto" placeholder="Escribe la moto (marca y modelo)" required>
             </div>
 
+            <!-- Selector dual de servicios -->
             <div class="form-group">
                 <label>Servicios:</label>
-                <div class="servicios-checkboxes">
-                    <?php foreach ($servicios as $serv): ?>
-                        <label class="checkbox-label">
-                            <input type="checkbox" name="servicios[]" value="<?= $serv['id_servicio'] ?>">
-                            <?= htmlspecialchars($serv['nombre']) ?> (<?= $serv['precio_base'] ?>€)
-                        </label>
-                    <?php endforeach; ?>
+                <div class="dual-select compact">
+                    <div class="available-services">
+                        <h4>Disponibles</h4>
+                        <ul id="available-services">
+                            <?php foreach ($servicios as $serv): ?>
+                                <li data-id="<?= $serv['id_servicio'] ?>">
+                                    <?= htmlspecialchars($serv['nombre']) ?> (<?= $serv['precio_base'] ?>€)
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </div>
+                    <div class="selected-services">
+                        <h4>Seleccionados</h4>
+                        <ul id="selected-services"></ul>
+                    </div>
                 </div>
             </div>
+            <!-- Inputs hidden que se actualizan automáticamente -->
+            <div id="selected-inputs"></div>
 
+            <!-- Observaciones -->
             <div class="form-group">
                 <label for="observaciones">Observaciones:</label>
                 <textarea id="observaciones" name="observaciones" placeholder="Detalles adicionales..."></textarea>
             </div>
 
+            <!-- Botón -->
             <button type="submit" class="btn-add">Agendar cita</button>
+
         </form>
     </div>
 
-    <!-- Lista de citas existentes -->
-    <div class="citas-container">
-        <?php if (!empty($citas)): ?>
-            <?php foreach ($citas as $cita): ?>
-                <div class="cita-card">
-                    <div class="cita-header">
-                        <h3>Cita #<?= $cita['id_cita'] ?></h3>
-                        <span class="estado estado-<?= strtolower(str_replace(' ', '-', $cita['estado'])) ?>">
-                            <?= $cita['estado'] ?>
-                        </span>
-                    </div>
-
-                    <div class="cita-body">
-                        <p><strong>Fecha de cita:</strong> <?= $cita['fecha_cita'] ?></p>
-                        <p><strong>Mecánico:</strong> <?= htmlspecialchars($cita['mecanico']['nombre']) ?></p>
-                        <p><strong>Moto:</strong> <?= htmlspecialchars($cita['moto']['marca'] ?? '') ?> <?= htmlspecialchars($cita['moto']['modelo'] ?? 'No especificada') ?></p>
-
-                        <div class="servicios">
-                            <strong>Servicios:</strong>
-                            <ul>
-                                <?php foreach ($cita['servicios'] as $servicio): ?>
-                                    <li><?= htmlspecialchars($servicio['nombre']) ?> - <?= $servicio['precio_final'] ?>€</li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
-
-                        <?php if (!empty($cita['observaciones'])): ?>
-                            <p class="observaciones"><strong>Observaciones:</strong> <?= nl2br(htmlspecialchars($cita['observaciones'])) ?></p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
-            <p class="no-citas">No tienes citas registradas.</p>
-        <?php endif; ?>
-    </div>
 </main>
 
+<script>
+    const available = document.getElementById('available-services');
+const selected = document.getElementById('selected-services');
+const selectedInputs = document.getElementById('selected-inputs');
+
+function updateHiddenInputs() {
+    selectedInputs.innerHTML = '';
+    Array.from(selected.children).forEach(li => {
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'servicios[]';
+        input.value = li.dataset.id;
+        selectedInputs.appendChild(input);
+    });
+}
+
+available.addEventListener('click', (e) => {
+    if(e.target.tagName === 'LI') {
+        selected.appendChild(e.target);
+        updateHiddenInputs();
+    }
+});
+
+selected.addEventListener('click', (e) => {
+    if(e.target.tagName === 'LI') {
+        available.appendChild(e.target);
+        updateHiddenInputs();
+    }
+});
+</script>

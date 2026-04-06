@@ -73,7 +73,7 @@ class motosController extends Controller {
     // Ver detalles de una moto
     public function ver_moto()
     {
-        $id_moto = $_GET['id'] ?? null;
+        $id_moto = $_GET['id_moto'] ?? null;
         $moto = $id_moto ? $this->motoModel->getMotoById($id_moto) : null;
 
         // Para usuario, eliminamos datos sensibles

@@ -122,7 +122,7 @@
             </div>
             <div class="moto-footer">
                 <span class="precio"><?= number_format($moto["precio"],0,",",".") ?> €</span>
-                <a href="<?= BASE_URL ?>/moto?id=<?= $moto["id_moto"] ?>" class="btn-ver">Ver detalles</a>
+                <a href="<?= BASE_URL ?>/moto?id_moto=<?= $moto["id_moto"] ?>" class="btn-ver">Ver detalles</a>
             </div>
         </div>
     <?php endforeach; ?>
