@@ -18,16 +18,21 @@
                     <div class="cita-body">
                         <p><strong>Fecha de cita:</strong> <?= $cita['fecha_cita'] ?></p>
                         <p><strong>Mecánico:</strong> <?= htmlspecialchars($cita['mecanico']['nombre']) ?></p>
-                        <p><strong>Moto:</strong> <?= htmlspecialchars($cita['moto']['marca']) ?> <?= htmlspecialchars($cita['moto']['modelo']) ?></p>
 
-                        <div class="servicios">
-                            <strong>Servicios:</strong>
-                            <ul>
-                                <?php foreach ($cita['servicios'] as $servicio): ?>
-                                    <li><?= htmlspecialchars($servicio['nombre']) ?> - <?= $servicio['precio_final'] ?>€</li>
-                                <?php endforeach; ?>
-                            </ul>
-                        </div>
+                        <?php if (!empty($cita['moto'])): ?>
+                            <p><strong>Moto:</strong> <?= htmlspecialchars($cita['moto']['marca']) ?> <?= htmlspecialchars($cita['moto']['modelo']) ?></p>
+                        <?php endif; ?>
+
+                        <?php if (!empty($cita['servicios'])): ?>
+                            <div class="servicios">
+                                <strong>Servicios:</strong>
+                                <ul>
+                                    <?php foreach ($cita['servicios'] as $servicio): ?>
+                                        <li><?= htmlspecialchars($servicio['nombre']) ?> - <?= $servicio['precio_final'] ?>€</li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
 
                         <?php if (!empty($cita['observaciones'])): ?>
                             <p class="observaciones"><strong>Observaciones:</strong> <?= nl2br(htmlspecialchars($cita['observaciones'])) ?></p>

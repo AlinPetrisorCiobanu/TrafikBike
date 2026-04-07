@@ -20,12 +20,15 @@ class TallerController extends Controller {
 
     // Formulario de nueva cita
     public function nuevaCita() {
-        $motos = $this->taller->getMotos();
+        $user_role = $_SESSION['user_role'] ?? 'USER';
+        $motos = $this->taller->getMotosByRole($user_role);
         $servicios = $this->taller->getServicios();
+
         return $this->view("taller/citas/index", [
             "styles" => ["citas.css"],
             "motos" => $motos,
-            "servicios" => $servicios
+            "servicios" => $servicios,
+            "user_role" => $user_role
         ]);
     }
 
@@ -33,20 +36,18 @@ class TallerController extends Controller {
     public function crearCita() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = [
-                'id_mecanico' => $_POST['id_mecanico'] ?? 1, // asignar mecánico por defecto
-                'id_moto' => $_POST['id_moto'],
+                'id_mecanico' => $_POST['id_mecanico'] ?? 1,
+                'id_moto' => $_POST['id_moto'] ?? null,
                 'fecha_cita' => $_POST['fecha_cita'],
                 'observaciones' => $_POST['observaciones'] ?? null,
                 'servicios' => []
             ];
 
-            // Mapear servicios
             if (!empty($_POST['servicios'])) {
                 foreach ($_POST['servicios'] as $id_servicio) {
-                    // Aquí podrías obtener el precio desde DB si quieres
                     $data['servicios'][] = [
                         'id_servicio' => $id_servicio,
-                        'precio_base' => 50, // valor fijo ejemplo, reemplazar según DB
+                        'precio_base' => 50,
                         'descuento' => 0
                     ];
                 }

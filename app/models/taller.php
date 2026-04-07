@@ -86,15 +86,26 @@ class Taller {
         return array_values($citas);
     }
 
-    // Obtener todas las motos
-    public function getMotos() {
-        $sql = "SELECT m.id_moto, m.matricula, mo.nombre AS modelo, ma.nombre AS marca
+    // Obtener todas las motos según rol
+    public function getMotosByRole($user_role) {
+        $roles_disponibles = ['SUPER_ADMIN','ADMIN','VENDEDOR'];
+        $estado = in_array($user_role, $roles_disponibles) ? 'Disponible' : 'Vendida';
+
+        $sql = "SELECT 
+                    m.id_moto,
+                    m.matricula,
+                    mo.nombre AS modelo,
+                    ma.nombre AS marca,
+                    es.nombre AS estado
                 FROM motos m
                 LEFT JOIN modelo mo ON m.id_modelo = mo.id_modelo
                 LEFT JOIN marcas ma ON mo.id_marca = ma.id_marca
+                LEFT JOIN estado_motos es ON m.id_estado = es.id_estado
+                WHERE es.nombre = :estado
                 ORDER BY ma.nombre, mo.nombre";
+
         $stmt = $this->pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute([':estado' => $estado]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
@@ -120,8 +131,8 @@ class Taller {
             $stmt = $this->pdo->prepare($sqlCita);
             $stmt->execute([
                 ':id_mecanico' => $data['id_mecanico'],
-                ':id_estado' => $data['id_estado'] ?? 1, // Pendiente
-                ':id_moto' => $data['id_moto'],
+                ':id_estado' => $data['id_estado'] ?? 1,
+                ':id_moto' => $data['id_moto'] ?? null,
                 ':fecha_cita' => $data['fecha_cita'],
                 ':fecha_entrada' => $data['fecha_entrada'] ?? null,
                 ':observaciones' => $data['observaciones'] ?? null

@@ -138,3 +138,30 @@ textarea {
         max-height: 180px;
     }
 }
+/* Inputs modernos */
+.input-text, .input-select, .input-date, .input-textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #d1d5db;
+    font-size: 14px;
+    transition: 0.3s;
+    background-color: #f9fafb;
+}
+
+.input-text:focus,
+.input-select:focus,
+.input-date:focus,
+.input-textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 2px rgba(59,130,246,0.2);
+}
+
+/* Hint pequeño */
+.hint {
+    font-size: 12px;
+    color: #6b7280;
+    margin-top: 2px;
+    display: block;
+}

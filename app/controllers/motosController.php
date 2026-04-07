@@ -78,7 +78,7 @@ class motosController extends Controller {
 
         // Para usuario, eliminamos datos sensibles
         if($moto){
-            unset($moto['matricula'], $moto['vin']);
+            unset( $moto['vin']);
         }
 
         return $this->view("motos/moto/index", [
