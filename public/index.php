@@ -24,6 +24,8 @@ $router->get('/tienda', 'tiendaController@index');
 
 // Taller y Citas
 $router->get('/taller', 'tallerController@index');
+
+
 $router->get('/taller/nuevaCita', 'tallerController@nuevaCita');
 $router->post('/taller/crearCita', 'tallerController@crearCita');
 
@@ -98,9 +100,14 @@ $router->post('/control/panel/tienda/modificar', 'control_panel/tiendaController
 $router->post('/control/panel/tienda/eliminar', 'control_panel/tiendaController@eliminar');
 
 /* Taller */
+// Panel de Taller y Citas
 $router->get('/control/panel/taller', 'control_panel/tallerController@index');
-$router->post('/control/panel/taller/modificar', 'control_panel/tallerController@modificar');
-$router->post('/control/panel/taller/eliminar', 'control_panel/tallerController@eliminar');
+
+// Mostrar formulario de modificación de cita (GET)
+$router->get('/control/panel/taller/modificar/(:num)', 'control_panel/tallerController@editCita');
+
+// Procesar actualización de cita (POST)
+$router->post('/control/panel/taller/modificar/(:num)', 'control_panel/tallerController@updateCita');
 
 /* Workers */
 $router->get('/control/panel/workers', 'control_panel/workersController@index');

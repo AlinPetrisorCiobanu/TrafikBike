@@ -71,36 +71,72 @@ main {
         color: #ece9e9;
     }
 
-    .submenu ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        gap: 20px;
-        justify-content: center;
-    }
+    .submenu-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    border-radius: 10px;
+    overflow: hidden;
+}
 
-    .submenu a {
-        display: inline-block;
-        padding: 18px 28px;
-        background: #007bff;
-        color: white;
-        text-decoration: none;
-        font-size: 16px;
-        border-radius: 10px;
-        transition: all 0.3s ease;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        min-width: 220px;
-    }
+.submenu-table th, 
+.submenu-table td {
+    padding: 12px 20px;
+    text-align: center;
+    color: #111827;
+}
 
-    .submenu a:hover {
-        background: #0056b3;
-        transform: translateY(-3px);
-        box-shadow: 0 8px 18px rgba(0,0,0,0.15);
-    }
+.submenu-table thead {
+    background: linear-gradient(90deg, #4a90e2, #357ABD);
+    color:#111827;
+    font-weight: 600;
+    font-size: 16px;
+}
 
-    /* Responsive (móvil) */
-    @media (max-width: 768px) {
-        .submenu ul {
-            flex-direction: column;
-        }
-    }
+.submenu-table tbody tr {
+    transition: background 0.3s, transform 0.2s;
+}
+
+.submenu-table tbody tr:nth-child(even) {
+    background-color: #f0f4f8;
+}
+
+.submenu-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.submenu-table tbody tr:hover {
+    background-color: #dbe9ff;
+    transform: scale(1.02);
+}
+
+.submenu-table td a {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background 0.3s, color 0.3s;
+}
+
+/* Diferentes colores para cada tipo de acción */
+.submenu-table td a[href*="Añadir"] {
+    background-color: #28a745;
+    color: rgb(0, 0, 0);
+}
+
+.submenu-table td a[href*="Modificar"] {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.submenu-table td a[href*="Eliminar"], 
+.submenu-table td a[href*="Dar de baja"] {
+    background-color: #dc3545;
+    color: white;
+}
+
+.submenu-table td a:hover {
+    opacity: 0.85;
+}
